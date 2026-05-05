@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
@@ -538,15 +537,7 @@ function FixedModelLayer({ canRenderScene }: { canRenderScene: boolean }) {
 
 function HeroSection() {
   return (
-    <section className="team-hero relative z-10 flex h-screen items-center justify-center overflow-hidden">
-      <Image
-        src={teamPageData.logoSrc}
-        alt={teamPageData.logoAlt}
-        width={240}
-        height={120}
-        priority
-      />
-    </section>
+    <section className="team-hero pointer-events-none relative z-10 flex h-screen items-center justify-center overflow-hidden" />
   );
 }
 
@@ -1119,25 +1110,6 @@ function FooterLine({
         <div className="h-[2px] w-24" style={{ backgroundColor: color }} />
       )}
     </div>
-  );
-}
-
-function MenuIcon() {
-  return (
-    <svg
-      className="h-8 w-8"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M4 6h16M4 12h16M4 18h16"
-      />
-    </svg>
   );
 }
 

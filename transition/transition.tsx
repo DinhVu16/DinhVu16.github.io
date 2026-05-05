@@ -1,226 +1,226 @@
 "use client";
 
-import { startTransition, useRef } from "react";
+import { useRef, startTransition } from "react";
 import { gsap } from "gsap";
+import { DrawSVGPlugin } from "gsap/dist/DrawSVGPlugin";
+import { useGSAP } from "@gsap/react";
 import { TransitionRouter } from "next-transition-router";
+import TelemetryText from "./TelemetryText";
+import SimulatedSmokeShader from "./backgroundShader";
+
+import { ReactSVG } from "react-svg";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(DrawSVGPlugin, useGSAP);
+}
 
 export default function TransitionFunc({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const leftCanvasRef = useRef<HTMLDivElement | null>(null);
-  const rightCanvasRef = useRef<HTMLDivElement | null>(null);
-  const lineRef = useRef<HTMLDivElement | null>(null);
+  const container = useRef<HTMLDivElement | null>(null);
+  const masterScaleRef = useRef<HTMLDivElement | null>(null);
+  const holePlugRef = useRef<HTMLDivElement | null>(null);
+  const bgRef = useRef<HTMLDivElement | null>(null);
+
+  // 1. SAFE HIDE ON MOUNT
+  // We use GSAP to hide the container on the first load instead of Tailwind.
+  // This prevents the initial flash but keeps it in the DOM so DrawSVG can measure it.
+  useGSAP(
+    () => {
+      gsap.set(container.current, { autoAlpha: 0 });
+    },
+    { scope: container },
+  );
 
   return (
     <TransitionRouter
       auto={true}
       leave={(next) => {
-        const leftCanvas = leftCanvasRef.current;
-        const rightCanvas = rightCanvasRef.current;
-        const line = lineRef.current;
+        const tl = gsap.timeline({ onComplete: next });
 
-        /**
-         * Nếu ref chưa sẵn sàng thì cho chuyển trang luôn,
-         * tránh bị đứng ở transition.
-         */
-        if (!leftCanvas || !rightCanvas || !line) {
-          next();
-          return () => {};
-        }
-
-        /**
-         * Báo cho LoadingScreen biết đây là chuyển trang trong app,
-         * không phải refresh thật.
-         */
-        sessionStorage.setItem("app-loading-complete", "true");
-
-        let hasNavigated = false;
-
-        const safeNext = () => {
-          if (hasNavigated) return;
-
-          hasNavigated = true;
-          window.clearTimeout(fallbackTimer);
-          next();
-        };
-
-        /**
-         * Fallback:
-         * Nếu GSAP onComplete bị miss ở production/GitHub,
-         * vẫn ép chuyển trang sau 1 giây.
-         */
-        const fallbackTimer = window.setTimeout(() => {
-          safeNext();
-        }, 1000);
-
-        const tl = gsap
-          .timeline({
-            onComplete: safeNext,
+        // 0. THE HARD RESET
+        tl.set(masterScaleRef.current, { scale: 1 })
+          .set(holePlugRef.current, { opacity: 1, xPercent: 50 })
+          .set(".f1-path", {
+            stroke: "#FFFFFF",
+            strokeWidth: 4,
+            fill: "transparent",
+            drawSVG: "0%",
+            xPercent: 50,
           })
-          .set(line, {
-            y: 0,
-            scaleY: 0,
-          })
-          .set(leftCanvas, {
-            x: "0%",
-            scaleX: 0,
-          })
-          .set(rightCanvas, {
-            x: "0%",
-            scaleX: 0,
-          })
+          .set(bgRef.current, { opacity: 1, xPercent: 20 })
 
-          /**
-           * 1. Đường line đen rơi xuống giữa màn hình.
-           */
-          .to(line, {
-            scaleY: 1,
-            duration: 0.35,
-            ease: "expo.inOut",
+          // 1. ACTIVATE TRANSITION SCREEN: The Wiping Mask
+          // We use a polygon clip-path. It starts squeezed to 0% width on the left edge.
+          .set(container.current, {
+            autoAlpha: 1,
+            clipPath: "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)",
           })
-
-          /**
-           * 2. Hai mảng trắng mở ra từ giữa.
-           */
+          // We expand the right edge of the polygon to 100%, revealing the static scene inside.
+          .to(container.current, {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            duration: 0.8,
+            ease: "power4.inOut",
+          })
           .to(
-            [leftCanvas, rightCanvas],
+            bgRef.current,
+            { xPercent: 0, duration: 1, ease: "power2.out" },
+            "<",
+          )
+          .to(
+            holePlugRef.current,
             {
-              scaleX: 1,
-              duration: 0.45,
-              ease: "power2.inOut",
+              xPercent: 0,
+              duration: 1.5,
+              ease: "power2.Out",
             },
-            "-=0.15"
+            "<",
+          )
+          .to(
+            ".f1-path",
+            {
+              xPercent: 0,
+              duration: 1.5,
+              ease: "power2.Out",
+            },
+            "<",
+          )
+
+          // 2. THE DRAW SEQUENCE
+          // Starts right as the mask finishes wiping across the logo
+          .to(
+            ".f1-path",
+            {
+              drawSVG: "100%",
+              duration: 1,
+              stagger: 0.1,
+              ease: "power1.inOut",
+            },
+            "-=1",
+          )
+          .to(
+            ".f1-path",
+            { fill: "#FFFFFF", duration: 0.5, ease: "power2.out" },
+            "+=0.1",
           );
 
-        return () => {
-          window.clearTimeout(fallbackTimer);
-          tl.kill();
-        };
+        return () => tl.kill();
       }}
       enter={(next) => {
-        const leftCanvas = leftCanvasRef.current;
-        const rightCanvas = rightCanvasRef.current;
-        const line = lineRef.current;
-
-        if (!leftCanvas || !rightCanvas || !line) {
-          startTransition(next);
-          return () => {};
-        }
-
-        let hasEntered = false;
-
-        const safeEnter = () => {
-          if (hasEntered) return;
-
-          hasEntered = true;
-          window.clearTimeout(fallbackTimer);
-
-          requestAnimationFrame(() => {
-            startTransition(next);
-          });
-        };
-
-        /**
-         * Fallback:
-         * Nếu enter animation gặp vấn đề, vẫn render page mới.
-         */
-        const fallbackTimer = window.setTimeout(() => {
-          safeEnter();
-        }, 900);
-
         const tl = gsap
           .timeline()
-          /**
-           * Render page mới khi màn trắng đang che.
-           */
-          .call(() => {
-            safeEnter();
+
+          // 3. THE BREATHER
+          .to({}, { duration: 0.2 })
+
+          // 4. OPEN THE PORTAL
+          .to(".f1-path", {
+            fill: "transparent",
+            stroke: "transparent",
+            duration: 0.3,
+            ease: "power2.inOut",
           })
-
-          /**
-           * Giữ màn trắng một nhịp ngắn.
-           */
-          .to({}, { duration: 0.3 })
-
-          /**
-           * 3. Line đen chạy xuống dưới.
-           */
-          .fromTo(
-            line,
+          .to(
+            holePlugRef.current,
             {
-              scaleY: 1,
-              y: 0,
-            },
-            {
-              y: "100vh",
+              opacity: 0,
               duration: 0.3,
-              ease: "power2.in",
-            }
+              ease: "power2.inOut",
+            },
+            "<",
           )
 
-          /**
-           * 4. Hai mảng trắng kéo ra hai bên để reveal page mới.
-           */
-          .fromTo(
-            leftCanvas,
+          // 5. THE FLY-THROUGH
+          .to(
+            masterScaleRef.current,
             {
-              scaleX: 1,
-              x: "0%",
-            },
-            {
-              x: "-100%",
+              scale: 70,
+              transformOrigin: "50% 48%",
               duration: 0.6,
-              ease: "expo.out",
+              ease: "expo.in",
             },
-            "-=0.1"
+            "-=0.2",
           )
-          .fromTo(
-            rightCanvas,
+          .to(
+            bgRef.current,
             {
-              scaleX: 1,
-              x: "0%",
+              opacity: 0,
+              duration: 0.4,
+              ease: "power2.out",
             },
-            {
-              x: "100%",
-              duration: 0.6,
-              ease: "expo.out",
-            },
-            "<"
+            "-=0.4",
           )
-          .set([leftCanvas, rightCanvas], {
-            scaleX: 0,
-            x: "0%",
-          })
-          .set(line, {
-            scaleY: 0,
-            y: 0,
+
+          // 6. GARBAGE COLLECTION
+          // Hide it and clear the clipPath so it doesn't break future layout measurements
+          .set(container.current, { autoAlpha: 0, clearProps: "clipPath" })
+          .call(() => {
+            requestAnimationFrame(() => startTransition(next));
           });
 
-        return () => {
-          window.clearTimeout(fallbackTimer);
-          tl.kill();
-        };
+        return () => tl.kill();
       }}
     >
       {children}
 
-      <div className="pointer-events-none fixed inset-0 z-[9999] flex overflow-hidden">
+      <div
+        ref={container}
+        className="fixed inset-0 z-9999 pointer-events-none flex items-center justify-center overflow-hidden"
+      >
         <div
-          ref={leftCanvasRef}
-          className="h-full w-1/2 origin-right scale-x-0 bg-white"
-        />
+          ref={masterScaleRef}
+          className="relative w-full h-full flex items-center justify-center origin-center will-change-transform"
+        >
+          {/* THE INVERSE MASK */}
+          <div
+            className="absolute inset-0 bg-[#ee2e25]"
+            style={{
+              WebkitMaskImage: `url('/trans-items/F1-trans.svg'), linear-gradient(black, black)`,
+              WebkitMaskPosition: "center, center",
+              WebkitMaskRepeat: "no-repeat, no-repeat",
+              WebkitMaskSize: "12rem auto, 100% 100%",
+              WebkitMaskComposite: "xor",
+              maskImage: `url('/trans-items/F1-trans.svg'), linear-gradient(black, black)`,
+              maskPosition: "center, center",
+              maskRepeat: "no-repeat, no-repeat",
+              maskSize: "12rem auto, 100% 100%",
+              maskComposite: "exclude",
+            }}
+          />
 
-        <div
-          ref={rightCanvasRef}
-          className="h-full w-1/2 origin-left scale-x-0 bg-white"
-        />
+          {/* THE HOLE PLUG */}
+          <div ref={holePlugRef} className="absolute w-75 h-75 bg-[#ee2e25]" />
 
+          {/* THE SVG INJECTOR */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <ReactSVG
+              src="/trans-items/F1-trans.svg"
+              afterInjection={(svg) => {
+                // Just tag the paths and hide them. The routers will handle the rest.
+                if (svg) {
+                  const paths = svg.querySelectorAll(
+                    "path, line, polyline, circle, rect",
+                  );
+                  paths.forEach((path) => path.classList.add("f1-path"));
+                  gsap.set(paths, {
+                    fill: "transparent",
+                    stroke: "transparent",
+                  });
+                }
+              }}
+              onError={(error) => console.error(error)}
+              className="w-48 h-auto"
+            />
+          </div>
+        </div>
         <div
-          ref={lineRef}
-          className="absolute left-1/2 top-0 h-full w-[5px] origin-top -translate-x-1/2 scale-y-0 bg-black"
-        />
+          ref={bgRef}
+          className="absolute inset-0 w-full h-full pointer-events-none mix-blend-screen opacity-90"
+        >
+          <TelemetryText />
+        </div>
       </div>
     </TransitionRouter>
   );

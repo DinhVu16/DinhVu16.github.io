@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
@@ -191,42 +190,42 @@ const teamPageData: TeamPageData = {
   galleryItems: [
     {
       label: "Alfa Romeo / 2020",
-      src: "/images/alfaromeo.jpg",
+      src: "/images/alfaromeo.png",
       alt: "Alfa Romeo archive 1",
       cardClassName: "mt-[-18vh] w-[26vw]",
       imageBoxClassName: "h-[58vh]",
     },
     {
       label: "C39 Detail",
-      src: "/images/alfaromeo.jpg",
+      src: "/images/alfaromeo.png",
       alt: "Alfa Romeo archive 2",
       cardClassName: "mt-[12vh] w-[42vw]",
       imageBoxClassName: "h-[64vh]",
     },
     {
       label: "Chassis",
-      src: "/images/alfaromeo.jpg",
+      src: "/images/alfaromeo.png",
       alt: "Alfa Romeo archive 3",
       cardClassName: "mt-[-22vh] w-[22vw]",
       imageBoxClassName: "h-[34vh]",
     },
     {
       label: "Race Frame",
-      src: "/images/alfaromeo.jpg",
+      src: "/images/alfaromeo.png",
       alt: "Alfa Romeo archive 4",
       cardClassName: "mt-[20vh] w-[30vw]",
       imageBoxClassName: "h-[44vh]",
     },
     {
       label: "Alfa Romeo Detail",
-      src: "/images/alfaromeo.jpg",
+      src: "/images/alfaromeo.png",
       alt: "Alfa Romeo archive 5",
       cardClassName: "mt-[-10vh] w-[46vw]",
       imageBoxClassName: "h-[58vh]",
     },
     {
       label: "Engine Era",
-      src: "/images/alfaromeo.jpg",
+      src: "/images/alfaromeo.png",
       alt: "Alfa Romeo archive 6",
       cardClassName: "mt-[16vh] w-[24vw]",
       imageBoxClassName: "h-[36vh]",
@@ -538,15 +537,7 @@ function FixedModelLayer({ canRenderScene }: { canRenderScene: boolean }) {
 
 function HeroSection() {
   return (
-    <section className="team-hero relative z-10 flex h-screen items-center justify-center overflow-hidden">
-      <Image
-        src={teamPageData.logoSrc}
-        alt={teamPageData.logoAlt}
-        width={240}
-        height={120}
-        priority
-      />
-    </section>
+    <section className="team-hero pointer-events-none relative z-10 flex h-screen items-center justify-center overflow-hidden" />
   );
 }
 
@@ -691,7 +682,6 @@ function CarHeaderSection({ data }: { data: TeamPageData }) {
             src={data.images.heroCar}
             alt={`${data.carName} car`}
             className="absolute inset-0 h-full w-full object-cover opacity-80"
-            style={{ objectPosition: "70% 35%" }}
           />
 
           {/* Logo nhỏ góc phải trên */}
@@ -797,7 +787,6 @@ function PrimaryDriverSection({ data }: { data: TeamPageData }) {
             src={data.images.primaryDriverBackground}
             alt={`${driver.name} background`}
             className="h-full w-full object-cover opacity-50"
-            style={{objectPosition: "50% 30%"}}
           />
         </div>
       </div>
@@ -835,7 +824,6 @@ function PrimaryDriverSection({ data }: { data: TeamPageData }) {
               src={data.images.primaryDriverPortrait}
               alt={driver.name}
               className="h-full w-full object-cover object-top"
-              style={{objectPosition: "50% 0%"}}
             />
           </div>
         </div>
@@ -946,7 +934,6 @@ function HighlightSection({ data }: { data: TeamPageData }) {
             src={data.images.highlightThumbnail}
             alt="Video Thumbnail"
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            style={{ objectPosition: "15% 35%" }}  
           />
         </div>
 
@@ -1123,25 +1110,6 @@ function FooterLine({
         <div className="h-[2px] w-24" style={{ backgroundColor: color }} />
       )}
     </div>
-  );
-}
-
-function MenuIcon() {
-  return (
-    <svg
-      className="h-8 w-8"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M4 6h16M4 12h16M4 18h16"
-      />
-    </svg>
   );
 }
 

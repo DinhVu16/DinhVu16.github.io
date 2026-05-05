@@ -15,6 +15,7 @@
     "next-transition-router": "^0.2.11",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "react-svg": "^17.2.4",
     "three": "^0.184.0"
   },
   "devDependencies": {

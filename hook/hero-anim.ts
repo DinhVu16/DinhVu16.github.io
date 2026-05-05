@@ -1,77 +1,154 @@
 import gsap from "gsap";
-import { Lightflash, trans_Flash } from "./effect/effect";
+import * as THREE from "three";
 import { SceneManager } from "../renders/ferrari";
 
-export const startMainShow = (engine: SceneManager) => {
-  const orbitData = { angle: 0.1 * Math.PI }; // Start at 270 degrees (behind the car)
-  const masterTl = gsap.timeline({ repeat: -1 });
-  //section 1
-  masterTl.addLabel("Label1");
+export const startMainShow = (
+  engine: SceneManager,
+  topBar: HTMLDivElement | null,
+  bottomBar: HTMLDivElement | null,
+  onComplete?: () => void,
+) => {
+  engine.camera.position.set(-5, 0.7, 8);
+  engine.camera.rotation.set(0, -Math.PI / 2, 0);
+  engine.light.position.set(0, 3, 0);
+
+  const masterTl = gsap.timeline({
+    repeat: 0,
+    delay: 0.5,
+    onComplete: onComplete,
+  });
+
+  if (topBar && bottomBar) {
+    masterTl.to(topBar, { y: "-38vh", duration: 1.8, ease: "power3.inOut" }, 0);
+    masterTl.to(
+      bottomBar,
+      { y: "38vh", duration: 1.8, ease: "power3.inOut" },
+      0,
+    );
+  }
+
+  masterTl.addLabel("Label1", 0);
   masterTl
-    .set(engine.fls, { value: 1 })
-    .to(engine.fls, { value: 0, duration: 1, ease: "steps(1)" }, "Label1");
-  masterTl
-    .set(engine.camera.position, { y: 1, z: 5 }, "Label1")
     .to(
       engine.camera.position,
-      {
-        y: 0.7,
-        z: 5.5,
-        duration: 8,
-        ease: "none",
-      },
+      { z: 0, duration: 2, ease: "power2.inOut" },
       "Label1",
     )
-    .addLabel("Label2"); // Ensure camera starts at the correct position
-  masterTl.add(Lightflash(engine.camera, engine.light), "Label1");
-  masterTl.add(trans_Flash(engine.fls), "Label1+=7.5");
-  //section 2
-  masterTl.set(
-    engine.camera.rotation,
-    {
-      x: Math.PI * -0.2,
-      y: Math.PI * -0.25,
-      z: Math.PI * -0.15,
-    },
-    "Label2",
-  );
-  masterTl
-    .set(engine.camera.position, { x: -1.5, y: 1.5, z: 1 }, "Label2")
     .to(
-      engine.camera.position,
-      {
-        x: -1.5,
-        y: 1.5,
-        z: 2.5,
-        duration: 8,
-        ease: "none",
-      },
-      "Label2",
-    )
-    .addLabel("Label3");
-  masterTl.add(Lightflash(engine.camera, engine.light), "Label2"); // Start at the same time as the previous animation;
-  masterTl.add(trans_Flash(engine.fls), "Label2+=7.5");
-  //section 3
-  masterTl.set(engine.camera.position, { y: 0.4 }, "Label3");
-  masterTl.to(
-    orbitData,
-    {
-      angle: Math.PI * 0.25,
-      duration: 8,
-      ease: "none",
-      onUpdate: () => {
-        // 2. Calculate new X and Z based on the current angle
-        engine.camera.position.x = 3 * Math.cos(orbitData.angle);
-        engine.camera.position.z = 3 * Math.sin(orbitData.angle);
+      engine.camera.rotation,
+      { y: -Math.PI / 2, duration: 2, ease: "power2.inOut" },
+      "Label1",
+    );
+};
 
-        // 3. Keep the camera pointed at the center of the scene
-        engine.camera.lookAt(1, 0.4, 1.5);
-      },
-    },
-    "Label3",
+export const triggerCameraView = (
+  engine: SceneManager,
+  view: "side" | "front" | "cockpit",
+  topBar: HTMLDivElement | null,
+  bottomBar: HTMLDivElement | null,
+  barsContainer: HTMLDivElement | null,
+) => {
+  gsap.killTweensOf(engine.camera.rotation);
+  gsap.killTweensOf(engine.camera.position);
+  gsap.killTweensOf(engine.light.position);
+  gsap.killTweensOf("cameraSweep");
+  if (topBar && bottomBar) gsap.killTweensOf([topBar, bottomBar]);
+  if (barsContainer) gsap.killTweensOf(barsContainer);
+
+  let targetPosition = { x: 0, y: 0, z: 0 };
+  let targetRotation = { x: 0, y: 0, z: 0 };
+  let LightPosition = { x: 0, y: 0, z: 0 };
+
+  // === 1. SPLIT THE OFFSETS ===
+  let topBarOffset = "38vh";
+  let bottomBarOffset = "38vh";
+  let containerRotation = 0;
+
+  if (view === "side") {
+    targetPosition = { x: -5, y: 0.7, z: 0 };
+    targetRotation = { x: 0, y: -Math.PI / 2, z: 0 };
+    LightPosition = { x: 0, y: 3, z: 0 };
+    topBarOffset = "40vh";
+    bottomBarOffset = "40vh";
+    containerRotation = 0;
+  } else if (view === "front") {
+    targetPosition = { x: -1.7, y: 0.5, z: 3.5 };
+    targetRotation = { x: 0, y: -Math.PI * 0.2, z: 0 };
+    LightPosition = { x: 2, y: 3, z: 0 };
+    topBarOffset = "150vh";
+    bottomBarOffset = "20vh";
+    containerRotation = 20;
+  } else if (view === "cockpit") {
+    targetPosition = { x: -0, y: 8, z: 0.2 };
+    targetRotation = { x: -Math.PI / 2, y: 0, z: 0 };
+    LightPosition = { x: 3, y: 3, z: 0 };
+    topBarOffset = "84vh";
+    bottomBarOffset = "84vh";
+    containerRotation = 90;
+  }
+
+  const startPos = engine.camera.position.clone();
+  const endPos = new THREE.Vector3(
+    targetPosition.x,
+    targetPosition.y,
+    targetPosition.z,
   );
-  masterTl.add(Lightflash(engine.camera, engine.light), "Label3"); // Start at the same time as the previous animation;
-  masterTl
-    .set(engine.fls, { value: 0 })
-    .to(engine.fls, { value: 1, duration: 1, ease: "steps(1)" }, "Label3+=7");
+  const controlPoint = new THREE.Vector3()
+    .addVectors(startPos, endPos)
+    .multiplyScalar(0.5);
+  const travelDistance = startPos.distanceTo(endPos);
+  controlPoint.x *= 1.3;
+  controlPoint.z *= 1.3;
+  controlPoint.y += travelDistance * 0.05;
+
+  const curve = new THREE.QuadraticBezierCurve3(startPos, controlPoint, endPos);
+  const proxy = { progress: 0 };
+
+  gsap.to(proxy, {
+    progress: 1,
+    duration: 1.8,
+    ease: "power2.inOut",
+    id: "cameraSweep",
+    onUpdate: () => {
+      curve.getPoint(proxy.progress, engine.camera.position);
+    },
+  });
+
+  gsap.to(engine.camera.rotation, {
+    x: targetRotation.x,
+    y: targetRotation.y,
+    z: targetRotation.z,
+    duration: 1.8,
+    ease: "power2.inOut",
+  });
+
+  gsap.to(engine.light.position, {
+    x: LightPosition.x,
+    y: LightPosition.y,
+    z: LightPosition.z,
+    duration: 1.8,
+    ease: "power2.inOut",
+  });
+
+  // === 3. APPLY THE INDEPENDENT OFFSETS ===
+  if (topBar && bottomBar) {
+    gsap.to(topBar, {
+      y: `-${topBarOffset}`,
+      duration: 1.8,
+      ease: "power3.inOut",
+    });
+    gsap.to(bottomBar, {
+      y: bottomBarOffset,
+      duration: 1.8,
+      ease: "power3.inOut",
+    });
+  }
+
+  if (barsContainer) {
+    gsap.to(barsContainer, {
+      rotate: containerRotation,
+      duration: 1.8,
+      ease: "power3.inOut",
+    });
+  }
 };
