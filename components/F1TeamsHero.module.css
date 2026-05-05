@@ -1,0 +1,217 @@
+/* Chiều cao thanh topbar F1 trong app/layout.tsx.
+   Nếu logo/topbar của bạn cao hơn hoặc thấp hơn, chỉnh số 124px này. */
+.root {
+  --f1-topbar-height: 0px;
+
+  position: relative;
+  min-height: 100%;
+  overflow-x: hidden;
+  background: #05060a;
+  color: white;
+}
+
+.heroColumns {
+  position: relative;
+  height: calc(100vh - var(--f1-topbar-height));
+  min-height: 520px;
+  overflow: hidden;
+  background: #05060a;
+  opacity: 1;
+}
+
+.columns {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+.col {
+  position: relative;
+  min-width: 0;
+  flex: 1 1 0%;
+  overflow: hidden;
+  text-decoration: none;
+  color: white;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  isolation: isolate;
+  transition:
+    flex-grow 0.5s ease,
+    filter 0.35s ease;
+}
+
+.col:last-child {
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition:
+    transform 0.55s ease,
+    filter 0.35s ease;
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.58)),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.5), transparent 40%);
+  transition:
+    background 0.35s ease,
+    opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.logo {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.88);
+  width: min(75%, 110px);
+  max-height: 56px;
+  object-fit: contain;
+  opacity: 0.38;
+  z-index: 5;
+  pointer-events: none;
+  transition:
+    transform 0.32s ease,
+    opacity 0.32s ease,
+    filter 0.32s ease;
+}
+
+.name {
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%) translateY(10px);
+  font-size: 0.86rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  z-index: 5;
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.columns:hover .col {
+  flex-grow: 0.72;
+  filter: brightness(0.68);
+}
+
+.columns:focus-within .col {
+  flex-grow: 0.72;
+  filter: brightness(0.68);
+}
+
+.columns:hover .col.active,
+.columns:focus-within .col.active,
+.col:hover,
+.col:focus-visible {
+  flex-grow: 2.8;
+  filter: brightness(1) !important;
+  z-index: 2;
+}
+
+.columns:hover .col.active .image,
+.columns:focus-within .col.active .image,
+.col:hover .image,
+.col:focus-visible .image {
+  transform: scale(1.08);
+}
+
+.columns:hover .col.active .shade,
+.columns:focus-within .col.active .shade,
+.col:hover .shade,
+.col:focus-visible .shade {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.34)),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.45), transparent 46%);
+}
+
+.columns:hover .col.active .logo,
+.columns:focus-within .col.active .logo,
+.col:hover .logo,
+.col:focus-visible .logo {
+  opacity: 1;
+  transform: translateX(-50%) scale(1.14);
+  filter: drop-shadow(0 12px 24px rgba(255, 255, 255, 0.22));
+}
+
+.columns:hover .col.active .name,
+.columns:focus-within .col.active .name,
+.col:hover .name,
+.col:focus-visible .name {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.col:focus-visible {
+  outline: 2px solid white;
+  outline-offset: -2px;
+}
+
+@media (max-width: 900px) {
+  .root {
+    --f1-topbar-height: 50px;
+  }
+
+  .heroColumns {
+    height: auto;
+    min-height: auto;
+  }
+
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 50vh;
+    height: auto;
+  }
+
+  .col {
+    flex: unset;
+    min-height: 50vh;
+  }
+
+  .columns:hover .col,
+  .columns:focus-within .col,
+  .columns:hover .col.active,
+  .columns:focus-within .col.active,
+  .col:hover,
+  .col:focus-visible {
+    flex-grow: unset;
+  }
+
+  .logo {
+    top: 60px;
+    max-height: 46px;
+  }
+
+  .name {
+    bottom: 18px;
+    font-size: 0.76rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .columns {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 46vh;
+  }
+
+  .col {
+    min-height: 46vh;
+  }
+}
+
