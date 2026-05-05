@@ -79,7 +79,7 @@ export type TeamCanvasProps = {
 
 // 1) MODEL: đổi đường dẫn model tại đây khi nhân bản sang xe khác.
 const TEAM_MODEL: TeamModelConfig = {
-  modelPath: "../models/alpharomeo",
+  modelPath: "../models/alfaromeo",
   lightColor: 0xffffff,
   lightIntensity: 5.2,
   ambientLightColor: 0xffffff,
