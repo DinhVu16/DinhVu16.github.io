@@ -222,14 +222,14 @@ const teamPageData: TeamPageData = {
       src: "/images/williams/williams-1.webp",
       alt: "Williams archive 1",
       cardClassName: "mt-[-18vh] w-[26vw]",
-      imageBoxClassName: "h-[58vh]",
+      imageBoxClassName: "aspect-[16/9]",
     },
     {
       label: "FW43 Detail",
       src: "/images/williams/williams-2.webp",
       alt: "Williams archive 2",
       cardClassName: "mt-[12vh] w-[42vw]",
-      imageBoxClassName: "h-[64vh]",
+      imageBoxClassName: "aspect-[16/9]",
     },
     {
       label: "Chassis",
@@ -243,7 +243,7 @@ const teamPageData: TeamPageData = {
       src: "/images/williams/williams-4.webp",
       alt: "Williams archive 4",
       cardClassName: "mt-[20vh] w-[30vw]",
-      imageBoxClassName: "h-[44vh]",
+      imageBoxClassName: "aspect-[16/9]",
     },
     {
       label: "Williams Detail",
@@ -257,7 +257,7 @@ const teamPageData: TeamPageData = {
       src: "/images/williams/williams-6.webp",
       alt: "Williams archive 6",
       cardClassName: "mt-[16vh] w-[24vw]",
-      imageBoxClassName: "h-[36vh]",
+      imageBoxClassName: "aspect-[16/9]",
     },
   ],
 
