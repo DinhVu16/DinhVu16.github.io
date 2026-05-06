@@ -30,7 +30,6 @@ export default function Topbar() {
 
     /**
      * Khi quay về hero / trang chủ, reset lại màu topbar.
-     * Nếu không reset, màu từ web xe trước đó sẽ bị giữ lại.
      */
     if (!isTeamPage) {
       topbarRoot.style.setProperty("--topbar-bg", "#ffffff");

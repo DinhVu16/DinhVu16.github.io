@@ -170,12 +170,10 @@ const teamPageData: TeamPageData = {
     surface: "#FFFFFF",
     text: "#111111",
     mutedText: "#555555",
-
-    accent: "#B6BABD",
-    accentDark: "#777B7E",
-    footerAccent: "#C8102E",
-
-    storyBefore: "rgba(17, 17, 17, 0.14)",
+    accent: "#C8102E",
+    accentDark: "#8F0B22",
+    footerAccent: "#2A2A2A",
+    storyBefore: "rgba(200, 16, 46, 0.16)",
     storyAfter: "#111111",
   },
 

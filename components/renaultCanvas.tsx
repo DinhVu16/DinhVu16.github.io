@@ -101,33 +101,34 @@ export type TeamCanvasProps = {
 // 1) MODEL: đổi đường dẫn model tại đây khi nhân bản xe khác.
 // =========================================================
 const TEAM_MODEL: TeamModelConfig = {
-  modelPath: "../models/renault",
-  lightColor: 0xfff8d8,
-  lightIntensity: 3.4,
-  ambientLightColor: 0xfffbe8,
-  ambientIntensity: 0.63,
+    modelPath: "../models/renault",
+    lightColor: 0xfff6a3,
+    lightIntensity: 4.1,
+    ambientLightColor: 0xffffff,
+    ambientIntensity: 0.88,
 };
 
 // =========================================================
 // 2) THEME: toàn bộ màu chính của section nằm ở đây.
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
-  sectionBackground: "#080808",
-  cinematicBar: "#FFD800",
+    sectionBackground:
+      "linear-gradient(180deg, #111006 0%, #302D00 52%, #050500 100%)",
+    cinematicBar: "#FFF500",
 
-  backgroundTitleColor: "rgba(255, 216, 0, 0.24)",
-  viewTitleColor: "rgba(255, 255, 255, 0.92)",
+    backgroundTitleColor: "rgba(255, 245, 0, 0.3)",
+    viewTitleColor: "#FFF500",
 
-  mainText: "#FFD800",
-  line: "#FFD800",
+    mainText: "#FFF500",
+    line: "#FFF500",
 
-  buttonActiveBg: "#FFD800",
-  buttonActiveText: "#080808",
-  buttonActiveBorder: "#FFD800",
+    buttonActiveBg: "#FFF500",
+    buttonActiveText: "#161300",
+    buttonActiveBorder: "#FFF500",
 
-  buttonIdleBg: "rgba(255, 216, 0, 0.10)",
-  buttonIdleText: "#FFD800",
-  buttonIdleBorder: "rgba(255, 216, 0, 0.48)",
+    buttonIdleBg: "rgba(255, 245, 0, 0.08)",
+    buttonIdleText: "#FFF500",
+    buttonIdleBorder: "rgba(255, 245, 0, 0.45)",
 };
 
 // =========================================================
@@ -137,7 +138,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   side: {
     title: "RENAULT",
     subtitle: "Renault DP World F1 Team",
-    titleColor: "rgba(255, 216, 0, 0.24)",
+    titleColor: "rgba(255, 245, 0, 0.3)",
     subtitleUseTitleColor: false,
 
     labelLeft: "ENGINEERED TO RETURN",
@@ -165,7 +166,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   front: {
     title: "R.S.20",
     subtitle: "Yellow Thunder",
-    titleColor: "rgba(255, 255, 255, 0.92)",
+    titleColor: "#FFF500",
 
     // Đây là dòng bạn cần: subtitle sẽ tự cùng màu với title SF1000.
     subtitleUseTitleColor: true,
@@ -196,7 +197,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   cockpit: {
     title: '"POWER IS BUILT THROUGH PATIENCE."',
     subtitle: "FERNANDO ALONSO",
-    titleColor: "#FFD800",
+    titleColor: "#FFF500",
     subtitleUseTitleColor: true,
 
     labelLeft: "",

@@ -101,33 +101,34 @@ export type TeamCanvasProps = {
 // 1) MODEL: đổi đường dẫn model tại đây khi nhân bản xe khác.
 // =========================================================
 const TEAM_MODEL: TeamModelConfig = {
-  modelPath: "../models/mclaren",
-  lightColor: 0xfff4e8,
-  lightIntensity: 3.4,
-  ambientLightColor: 0xfff8ef,
-  ambientIntensity: 0.64,
+    modelPath: "../models/mclaren",
+    lightColor: 0xffc27a,
+    lightIntensity: 4.2,
+    ambientLightColor: 0xffffff,
+    ambientIntensity: 0.9,
 };
 
 // =========================================================
 // 2) THEME: toàn bộ màu chính của section nằm ở đây.
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
-sectionBackground: "#0B0B0B",
-  cinematicBar: "#FF8700",
+  sectionBackground:
+    "linear-gradient(180deg, #FF8700 0%, #E46F00 52%, #4A2500 100%)",
+  cinematicBar: "#101010",
 
-  backgroundTitleColor: "rgba(255, 135, 0, 0.24)",
-  viewTitleColor: "rgba(255, 255, 255, 0.92)",
+  backgroundTitleColor: "rgba(255, 246, 232, 0.32)",
+  viewTitleColor: "#FFFFFF",
 
-  mainText: "#FF8700",
-  line: "#00D2FF",
+  mainText: "#FFFFFF",
+  line: "#FFFFFF",
 
-  buttonActiveBg: "#FF8700",
-  buttonActiveText: "#0B0B0B",
-  buttonActiveBorder: "#FF8700",
+  buttonActiveBg: "#101010",
+  buttonActiveText: "#FFFFFF",
+  buttonActiveBorder: "#101010",
 
-  buttonIdleBg: "rgba(255, 135, 0, 0.10)",
-  buttonIdleText: "#FF8700",
-  buttonIdleBorder: "rgba(255, 135, 0, 0.48)",
+  buttonIdleBg: "rgba(255, 255, 255, 0.12)",
+  buttonIdleText: "#FFFFFF",
+  buttonIdleBorder: "rgba(255, 255, 255, 0.45)",
 };
 
 // =========================================================
@@ -137,7 +138,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   side: {
     title: "MCLAREN",
     subtitle: "McLaren F1 Team",
-    titleColor: "rgba(255, 135, 0, 0.24)",
+    titleColor: "rgba(255, 246, 232, 0.32)",
     subtitleUseTitleColor: false,
 
     labelLeft: "PAPAYA RACING",
@@ -165,7 +166,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   front: {
     title: "MCL35",
     subtitle: "Papaya Surge",
-    titleColor: "rgba(255, 255, 255, 0.92)",
+    titleColor: "#FFFFFF",
 
     // Đây là dòng bạn cần: subtitle sẽ tự cùng màu với title SF1000.
     subtitleUseTitleColor: true,
@@ -196,7 +197,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   cockpit: {
     title: '"LIFE IS MEASURED IN ACHIEVEMENT, NOT IN YEARS ALONE."',
     subtitle: "BRUCE MCLAREN",
-    titleColor: "#FF8700",
+    titleColor: "#FFFFFF",
     subtitleUseTitleColor: true,
 
     labelLeft: "",

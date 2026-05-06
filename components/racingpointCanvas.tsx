@@ -101,33 +101,34 @@ export type TeamCanvasProps = {
 // 1) MODEL: đổi đường dẫn model tại đây khi nhân bản xe khác.
 // =========================================================
 const TEAM_MODEL: TeamModelConfig = {
-  modelPath: "../models/racingpoint",
-  lightColor: 0xfff7fb,
-  lightIntensity: 3.0,
-  ambientLightColor: 0xfffafd,
-  ambientIntensity: 0.66,
+    modelPath: "../models/racingpoint",
+    lightColor: 0xffc8e4,
+    lightIntensity: 4.0,
+    ambientLightColor: 0xffffff,
+    ambientIntensity: 0.92,
 };
 
 // =========================================================
 // 2) THEME: toàn bộ màu chính của section nằm ở đây.
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
-    sectionBackground: "#210016",
-    cinematicBar: "#F596C8",
+  sectionBackground:
+      "linear-gradient(180deg, #F596C8 0%, #E65AA7 52%, #7A2E55 100%)",
+  cinematicBar: "#111111",
 
-    backgroundTitleColor: "rgba(245, 150, 200, 0.26)",
-    viewTitleColor: "rgba(255, 240, 248, 0.95)",
+  backgroundTitleColor: "rgba(255, 255, 255, 0.34)",
+  viewTitleColor: "#FFFFFF",
 
-    mainText: "#FFC6E3",
-    line: "#F596C8",
+  mainText: "#FFFFFF",
+  line: "#FFFFFF",
 
-    buttonActiveBg: "#F596C8",
-    buttonActiveText: "#210016",
-    buttonActiveBorder: "#F596C8",
+  buttonActiveBg: "#111111",
+  buttonActiveText: "#FFFFFF",
+  buttonActiveBorder: "#111111",
 
-    buttonIdleBg: "rgba(245, 150, 200, 0.12)",
-    buttonIdleText: "#FFC6E3",
-    buttonIdleBorder: "rgba(255, 198, 227, 0.5)",
+  buttonIdleBg: "rgba(255, 255, 255, 0.12)",
+  buttonIdleText: "#FFFFFF",
+  buttonIdleBorder: "rgba(255, 255, 255, 0.45)",
 };
 
 // =========================================================
@@ -137,7 +138,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   side: {
     title: "RACING POINT",
     subtitle: "BWT Racing Point F1 Team",
-    titleColor: "rgba(245, 150, 200, 0.26)",
+    titleColor: "rgba(255, 255, 255, 0.34)",
     subtitleUseTitleColor: false,
 
     labelLeft: "THE PINK ERA",
@@ -165,7 +166,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   front: {
     title: "RP20",
     subtitle: "Pink Mercedes",
-    titleColor: "rgba(255, 240, 248, 0.95)",
+    titleColor: "#FFFFFF",
 
     // Đây là dòng bạn cần: subtitle sẽ tự cùng màu với title SF1000.
     subtitleUseTitleColor: true,
@@ -196,7 +197,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   cockpit: {
     title: '"UNDERDOGS DO NOT WAIT FOR PERMISSION."',
     subtitle: "SERGIO PEREZ",
-    titleColor: "#FFC6E3",
+    titleColor: "#FFFFFF",
     subtitleUseTitleColor: true,
 
     labelLeft: "",

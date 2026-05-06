@@ -167,16 +167,14 @@ const teamPageData: TeamPageData = {
 
   theme: {
     pageBackground: "#071C1C",
-    surface: "#EFFFFD",
-    text: "#061B1B",
-    mutedText: "#4A6F6C",
-
+    surface: "#F3FFFD",
+    text: "#F3FFFD",
+    mutedText: "#A7C8C4",
     accent: "#00D2BE",
-    accentDark: "#006C63",
+    accentDark: "#00897F",
     footerAccent: "#003B37",
-
     storyBefore: "rgba(0, 210, 190, 0.18)",
-    storyAfter: "#F5FFFF",
+    storyAfter: "#F3FFFD",
   },
 
   images: {

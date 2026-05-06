@@ -166,15 +166,13 @@ const teamPageData: TeamPageData = {
   storyLabelLeft: "The Story",
 
   theme: {
-    pageBackground: "#0F0F0F",
+    pageBackground: "#120D08",
     surface: "#FFF6E8",
-    text: "#14100B",
-    mutedText: "#7A5632",
-
+    text: "#FFF6E8",
+    mutedText: "#D8B38C",
     accent: "#FF8700",
     accentDark: "#B85F00",
     footerAccent: "#3A2207",
-
     storyBefore: "rgba(255, 135, 0, 0.18)",
     storyAfter: "#FFF6E8",
   },

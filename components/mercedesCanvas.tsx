@@ -102,32 +102,33 @@ export type TeamCanvasProps = {
 // =========================================================
 const TEAM_MODEL: TeamModelConfig = {
     modelPath: "../models/mercedes",
-    lightColor: 0xf4fffd,
-    lightIntensity: 3.6,
+    lightColor: 0xbff7ef,
+    lightIntensity: 4.0,
     ambientLightColor: 0xffffff,
-    ambientIntensity: 0.68,
+    ambientIntensity: 0.9,
 };
 
 // =========================================================
 // 2) THEME: toàn bộ màu chính của section nằm ở đây.
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
-    sectionBackground: "#001F1D",
-    cinematicBar: "#00F5D4",
+  sectionBackground:
+      "linear-gradient(180deg, #071C1C 0%, #003B37 52%, #000F0E 100%)",
+  cinematicBar: "#00D2BE",
 
-    backgroundTitleColor: "rgba(0, 245, 212, 0.24)",
-    viewTitleColor: "rgba(239, 255, 253, 0.95)",
+  backgroundTitleColor: "rgba(0, 210, 190, 0.32)",
+  viewTitleColor: "#F3FFFD",
 
-    mainText: "#EFFFFD",
-    line: "#00F5D4",
+  mainText: "#F3FFFD",
+  line: "#00D2BE",
 
-    buttonActiveBg: "#EFFFFD",
-    buttonActiveText: "#001F1D",
-    buttonActiveBorder: "#EFFFFD",
+  buttonActiveBg: "#00D2BE",
+  buttonActiveText: "#061B1B",
+  buttonActiveBorder: "#00D2BE",
 
-    buttonIdleBg: "rgba(0, 245, 212, 0.10)",
-    buttonIdleText: "#EFFFFD",
-    buttonIdleBorder: "rgba(239, 255, 253, 0.45)",
+  buttonIdleBg: "rgba(243, 255, 253, 0.08)",
+  buttonIdleText: "#F3FFFD",
+  buttonIdleBorder: "rgba(0, 210, 190, 0.45)",
 };
 
 // =========================================================
@@ -137,7 +138,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   side: {
     title: "MERCEDES",
     subtitle: "Mercedes-AMG Petronas Formula One Team",
-    titleColor: "rgba(0, 245, 212, 0.24)",
+    titleColor: "rgba(0, 210, 190, 0.32)",
     subtitleUseTitleColor: false,
 
     labelLeft: "HYBRID ERA DOMINANCE",
@@ -165,7 +166,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   front: {
     title: "W11",
     subtitle: "Black Arrow",
-    titleColor: "rgba(239, 255, 253, 0.95)",
+    titleColor: "#F3FFFD",
 
     // Đây là dòng bạn cần: subtitle sẽ tự cùng màu với title SF1000.
     subtitleUseTitleColor: true,
@@ -196,7 +197,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   cockpit: {
     title: '"EXCELLENCE IS NEVER AN ACCIDENT."',
     subtitle: "TOTO WOLFF",
-    titleColor: "#EFFFFD",
+    titleColor: "#F3FFFD",
     subtitleUseTitleColor: true,
 
     labelLeft: "",

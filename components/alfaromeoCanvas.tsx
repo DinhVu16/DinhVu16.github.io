@@ -101,33 +101,34 @@ export type TeamCanvasProps = {
 // 1) MODEL: đổi đường dẫn model tại đây khi nhân bản xe khác.
 // =========================================================
 const TEAM_MODEL: TeamModelConfig = {
-    modelPath: "../models/mercedes",
-    lightColor: 0xf4fffd,
-    lightIntensity: 3.6,
+    modelPath: "../models/alfaromeo",
+    lightColor: 0xffc2c2,
+    lightIntensity: 4.0,
     ambientLightColor: 0xffffff,
-    ambientIntensity: 0.68,
+    ambientIntensity: 0.9,
 };
 
 // =========================================================
 // 2) THEME: toàn bộ màu chính của section nằm ở đây.
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
-    sectionBackground: "#001F1D",
-    cinematicBar: "#00F5D4",
+  sectionBackground:
+      "linear-gradient(180deg, #900000 0%, #5A0000 55%, #130508 100%)",
+  cinematicBar: "#FFF4F4",
 
-    backgroundTitleColor: "rgba(0, 245, 212, 0.24)",
-    viewTitleColor: "rgba(239, 255, 253, 0.95)",
+  backgroundTitleColor: "rgba(255, 244, 244, 0.28)",
+  viewTitleColor: "#FFF4F4",
 
-    mainText: "#EFFFFD",
-    line: "#00F5D4",
+  mainText: "#FFF4F4",
+  line: "#FFF4F4",
 
-    buttonActiveBg: "#EFFFFD",
-    buttonActiveText: "#001F1D",
-    buttonActiveBorder: "#EFFFFD",
+  buttonActiveBg: "#FFF4F4",
+  buttonActiveText: "#130508",
+  buttonActiveBorder: "#FFF4F4",
 
-    buttonIdleBg: "rgba(0, 245, 212, 0.10)",
-    buttonIdleText: "#EFFFFD",
-    buttonIdleBorder: "rgba(239, 255, 253, 0.45)",
+  buttonIdleBg: "rgba(255, 244, 244, 0.08)",
+  buttonIdleText: "#FFF4F4",
+  buttonIdleBorder: "rgba(255, 244, 244, 0.42)",
 };
 
 // =========================================================
@@ -135,13 +136,13 @@ const TEAM_THEME: CanvasTheme = {
 // =========================================================
 const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   side: {
-    title: "MERCEDES",
-    subtitle: "Mercedes-AMG Petronas Formula One Team",
-    titleColor: "rgba(0, 245, 212, 0.24)",
+    title: "ALFA ROMEO",
+    subtitle: "Alfa Romeo Racing ORLEN",
+    titleColor: "rgba(255, 244, 244, 0.28)",
     subtitleUseTitleColor: false,
 
-    labelLeft: "HYBRID ERA DOMINANCE",
-    labelRight: "BRACKLEY, UNITED KINGDOM",
+    labelLeft: "SWISS PRECISION",
+    labelRight: "HINWIL, SWITZERLAND",
 
     showLine: true,
     titleLayer: "behind-car",
@@ -150,7 +151,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
     rightLabelClass: "absolute top-[14vh] right-[5vw] overflow-hidden pb-2 pr-4",
     titleContainerClass:
       "absolute inset-0 flex flex-col items-center justify-center font-akira",
-    titleClass: "font-black uppercase tracking-wide leading-none text-[12vw]",
+    titleClass: "font-black uppercase tracking-wide leading-none text-[10.18vw]",
 
     textEffect: "blink-slide",
     exitAnim: {
@@ -163,9 +164,9 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   },
 
   front: {
-    title: "W11",
-    subtitle: "Black Arrow",
-    titleColor: "rgba(239, 255, 253, 0.95)",
+    title: "C39",
+    subtitle: "Burgundy Line",
+    titleColor: "#FFF4F4",
 
     // Đây là dòng bạn cần: subtitle sẽ tự cùng màu với title SF1000.
     subtitleUseTitleColor: true,
@@ -194,9 +195,9 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   },
 
   cockpit: {
-    title: '"EXCELLENCE IS NEVER AN ACCIDENT."',
-    subtitle: "TOTO WOLFF",
-    titleColor: "#EFFFFD",
+    title: '"LEAVE ME ALONE, I KNOW WHAT TO DO."',
+    subtitle: "KIMI RAIKKONEN",
+    titleColor: "#FFF4F4",
     subtitleUseTitleColor: true,
 
     labelLeft: "",

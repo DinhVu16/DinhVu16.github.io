@@ -101,34 +101,34 @@ export type TeamCanvasProps = {
 // 1) MODEL: đổi đường dẫn model tại đây khi nhân bản xe khác.
 // =========================================================
 const TEAM_MODEL: TeamModelConfig = {
-  modelPath: "../models/redbull",
-  lightColor: 0xf5f7ff,
-  lightIntensity: 3.3,
-  ambientLightColor: 0xfafcff,
-  ambientIntensity: 0.62,
+    modelPath: "../models/redbull",
+    lightColor: 0xe8ecff,
+    lightIntensity: 4.1,
+    ambientLightColor: 0xffffff,
+    ambientIntensity: 0.88,
 };
 
 // =========================================================
 // 2) THEME: toàn bộ màu chính của section nằm ở đây.
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
-sectionBackground: "#050721",
-    cinematicBar: "#FFCC00",
+  sectionBackground:
+    "linear-gradient(180deg, #050816 0%, #070B1A 55%, #02040D 100%)",
+  cinematicBar: "#FFCC00",
 
-    backgroundTitleColor: "rgba(255, 204, 0, 0.22)",
-    viewTitleColor: "rgba(255, 255, 255, 0.92)",
+  backgroundTitleColor: "rgba(255, 204, 0, 0.24)",
+  viewTitleColor: "#FFCC00",
 
-    mainText: "#FFCC00",
-    line: "#E10600",
+  mainText: "#FFCC00",
+  line: "#FFCC00",
 
-    buttonActiveBg: "#FFCC00",
-    buttonActiveText: "#050721",
-    buttonActiveBorder: "#FFCC00",
+  buttonActiveBg: "#FFCC00",
+  buttonActiveText: "#070B1A",
+  buttonActiveBorder: "#FFCC00",
 
-    buttonIdleBg: "rgba(255, 204, 0, 0.10)",
-    buttonIdleText: "#FFCC00",
-    buttonIdleBorder: "rgba(255, 204, 0, 0.45)",
-
+  buttonIdleBg: "rgba(255, 204, 0, 0.08)",
+  buttonIdleText: "#FFCC00",
+  buttonIdleBorder: "rgba(255, 204, 0, 0.45)",
 };
 
 // =========================================================
@@ -138,7 +138,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   side: {
     title: "REDBULL",
     subtitle: "Aston Martin Red Bull Racing",
-    titleColor: "rgba(255, 204, 0, 0.22)",
+    titleColor: "rgba(255, 204, 0, 0.24)",
     subtitleUseTitleColor: false,
 
     labelLeft: "BUILT TO ATTACK",
@@ -166,7 +166,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   front: {
     title: "RB16",
     subtitle: "Charging Bull",
-    titleColor: "rgba(255, 255, 255, 0.92)",
+    titleColor: "#FFCC00",
 
     // Đây là dòng bạn cần: subtitle sẽ tự cùng màu với title SF1000.
     subtitleUseTitleColor: true,

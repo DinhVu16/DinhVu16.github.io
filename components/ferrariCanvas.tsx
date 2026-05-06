@@ -101,34 +101,34 @@ export type TeamCanvasProps = {
 // 1) MODEL: đổi đường dẫn model tại đây khi nhân bản xe khác.
 // =========================================================
 const TEAM_MODEL: TeamModelConfig = {
-  modelPath: "../models/ferrari",
-  lightColor: 0xfff1f1,
-  lightIntensity: 3.2,
-  ambientLightColor: 0xfff7f7,
-  ambientIntensity: 0.60,
+    modelPath: "../models/ferrari",
+    lightColor: 0xffb3ad,
+    lightIntensity: 4.3,
+    ambientLightColor: 0xffffff,
+    ambientIntensity: 0.92,
 };
 
 // =========================================================
 // 2) THEME: toàn bộ màu chính của section nằm ở đây.
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
-    sectionBackground: "#120000",
-    cinematicBar: "#E10600",
+  sectionBackground:
+      "linear-gradient(180deg, #E10600 0%, #C90000 52%, #7A0000 100%)",
+  cinematicBar: "#FFFFFF",
 
-    backgroundTitleColor: "rgba(255, 255, 255, 0.16)",
-    viewTitleColor: "rgba(255, 255, 255, 0.9)",
+  backgroundTitleColor: "rgba(255, 235, 235, 0.36)",
+  viewTitleColor: "#FFFFFF",
 
-    mainText: "#FFFFFF",
-    line: "#E10600",
+  mainText: "#FFFFFF",
+  line: "#FFFFFF",
 
-    buttonActiveBg: "#E10600",
-    buttonActiveText: "#FFFFFF",
-    buttonActiveBorder: "#E10600",
+  buttonActiveBg: "#FFFFFF",
+  buttonActiveText: "#111111",
+  buttonActiveBorder: "#FFFFFF",
 
-    buttonIdleBg: "rgba(255, 255, 255, 0.08)",
-    buttonIdleText: "#FFFFFF",
-    buttonIdleBorder: "rgba(255, 255, 255, 0.45)",
-
+  buttonIdleBg: "rgba(255, 255, 255, 0.08)",
+  buttonIdleText: "#FFFFFF",
+  buttonIdleBorder: "rgba(255, 255, 255, 0.42)",
 };
 
 // =========================================================
@@ -138,7 +138,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   side: {
     title: "FERRARI",
     subtitle: "SCUDERIA FERRARI",
-    titleColor: "rgba(255, 255, 255, 0.22)",
+    titleColor: "rgba(255, 235, 235, 0.36)",
     subtitleUseTitleColor: false,
 
     labelLeft: "LEGACY SINCE 1929",
@@ -166,7 +166,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   front: {
     title: "SF1000",
     subtitle: "Scarlet Legacy",
-    titleColor: "rgba(255, 255, 255, 0.56)",
+    titleColor: "#FFFFFF",
 
     // Đây là dòng bạn cần: subtitle sẽ tự cùng màu với title SF1000.
     subtitleUseTitleColor: true,
@@ -197,7 +197,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   cockpit: {
     title: '"RACING IS IN OUR BLOOD."',
     subtitle: "ENZO FERRARI",
-    titleColor: "#ffffff",
+    titleColor: "#FFFFFF",
     subtitleUseTitleColor: true,
 
     labelLeft: "",
