@@ -12,10 +12,12 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 ========================================================= */
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
+
 /* =========================================================
    1. 3D MODEL
    ---------------------------------------------------------
    Muốn đổi model/canvas cho xe khác thì đổi dòng import này.
+
 
    Ví dụ:
    Ferrari:    "../../../components/ferrariCanvas"
@@ -25,6 +27,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const TeamScene = dynamic(() => import("../../../components/renaultCanvas"), {
   ssr: false,
 });
+
 
 /* =========================================================
    2. TYPES
@@ -37,9 +40,12 @@ type GalleryItem = {
   imageBoxClassName: string;
 };
 
+
 type DriverStats = [label: string, value: string];
 
+
 type HighlightItem = [label: string, value: string, note: string];
+
 
 type TeamTheme = {
   /**
@@ -48,11 +54,13 @@ type TeamTheme = {
    */
   pageBackground: string;
 
+
   /**
    * surface:
    * Màu nền các section thông tin xe/tay đua.
    */
   surface: string;
+
 
   /**
    * text / mutedText:
@@ -61,11 +69,13 @@ type TeamTheme = {
   text: string;
   mutedText: string;
 
+
   /**
    * accent:
    * Màu chính của team/xe.
    */
   accent: string;
+
 
   /**
    * accentDark:
@@ -73,11 +83,13 @@ type TeamTheme = {
    */
   accentDark: string;
 
+
   /**
    * footerAccent:
    * Màu footer cuối trang.
    */
   footerAccent: string;
+
 
   /**
    * storyBefore / storyAfter:
@@ -87,6 +99,7 @@ type TeamTheme = {
   storyAfter: string;
 };
 
+
 type TeamPageData = {
   /**
    * ĐỔI TÊN XE Ở ĐÂY.
@@ -95,15 +108,20 @@ type TeamPageData = {
    */
   carName: string;
 
+
   teamName: string;
   season: string;
+
 
   logoSrc: string;
   logoAlt: string;
 
+
   storyLabelLeft: string;
 
+
   theme: TeamTheme;
+
 
   images: {
     heroCar: string;
@@ -113,9 +131,12 @@ type TeamPageData = {
     highlightThumbnail: string;
   };
 
+
   galleryItems: GalleryItem[];
 
+
   storyText: string;
+
 
   primaryDriver: {
     name: string;
@@ -123,6 +144,7 @@ type TeamPageData = {
     videoLabel: string;
     description: string;
   };
+
 
   secondaryDriver: {
     name: string;
@@ -132,6 +154,7 @@ type TeamPageData = {
     stats: DriverStats[];
   };
 
+
   highlight: {
     title: string;
     subTitle: string;
@@ -140,6 +163,7 @@ type TeamPageData = {
     items: HighlightItem[];
   };
 };
+
 
 /* =========================================================
    3. TEAM DATA — CHỈNH NỘI DUNG CHÍNH Ở ĐÂY
@@ -153,17 +177,22 @@ type TeamPageData = {
    - đổi text driver/story/highlight
 ========================================================= */
 const teamPageData: TeamPageData = {
-  teamName: "Renault DP World F1 Team",
+  teamName: "RENULT DP WORLD F1 TEAM",
+
 
   // Đổi tên xe ở đây.
   carName: "R.S.20",
 
+
   season: "2020",
+
 
   logoSrc: "/logos/renault.svg",
   logoAlt: "Renault logo",
 
+
   storyLabelLeft: "The Story",
+
 
   theme: {
     pageBackground: "#111006",
@@ -177,61 +206,65 @@ const teamPageData: TeamPageData = {
     storyAfter: "#FFF7D1",
   },
 
+
   images: {
-    heroCar: "/images/anh-xe.avif",
-    primaryDriverBackground: "/images/seb.jpg",
-    primaryDriverPortrait: "/images/ve.jpg",
-    secondaryDriverPortrait: "/images/le.jpg",
-    highlightThumbnail: "/images/thumbnail.jpg",
+    heroCar: "/images/renault/anh-xe.webp",
+    primaryDriverBackground: "/images/renault/pdb.webp",
+    primaryDriverPortrait: "/images/renault/pdp.webp",
+    secondaryDriverPortrait: "/images/renault/sdp.webp",
+    highlightThumbnail: "/images/renault/thumbnail.webp",
   },
+
 
   galleryItems: [
     {
       label: "Renault / 2020",
-      src: "/images/renault.jpg",
+      src: "/images/renault/renault-1.webp",
       alt: "Renault archive 1",
       cardClassName: "mt-[-18vh] w-[26vw]",
       imageBoxClassName: "h-[58vh]",
     },
     {
       label: "R.S.20 Detail",
-      src: "/images/renault.jpg",
+      src: "/images/renault/renault-2.webp",
       alt: "Renault archive 2",
       cardClassName: "mt-[12vh] w-[42vw]",
       imageBoxClassName: "h-[64vh]",
     },
     {
       label: "Chassis",
-      src: "/images/renault.jpg",
+      src: "/images/renault/renault-3.webp",
       alt: "Renault archive 3",
       cardClassName: "mt-[-22vh] w-[22vw]",
       imageBoxClassName: "h-[34vh]",
     },
     {
       label: "Race Frame",
-      src: "/images/renault.jpg",
+      src: "/images/renault/renault-4.webp",
       alt: "Renault archive 4",
       cardClassName: "mt-[20vh] w-[30vw]",
       imageBoxClassName: "h-[44vh]",
     },
     {
       label: "Renault Detail",
-      src: "/images/renault.jpg",
+      src: "/images/renault/renault-5.webp",
       alt: "Renault archive 5",
       cardClassName: "mt-[-10vh] w-[46vw]",
       imageBoxClassName: "h-[58vh]",
     },
     {
       label: "Engine Era",
-      src: "/images/renault.jpg",
+      src: "/images/renault/renault-6.webp",
       alt: "Renault archive 6",
       cardClassName: "mt-[16vh] w-[24vw]",
       imageBoxClassName: "h-[36vh]",
     },
   ],
 
+
   storyText:
     "Renault made significant strides in 2020, with Daniel Ricciardo securing the team's first podiums since their return as a full works team. The R.S.20 was particularly strong on low-downforce tracks like Spa and Monza. This season served as a \"final hurrah\" for the Renault name before rebranding to Alpine for 2021.",
+
 
   primaryDriver: {
     name: "Daniel Ricciardo",
@@ -240,6 +273,7 @@ const teamPageData: TeamPageData = {
     description:
       "Led Renault's strongest performances of the season with sharp racecraft and consistent points finishes. His podiums marked Renault's return to the front of the midfield battle.",
   },
+
 
   secondaryDriver: {
     name: "Esteban Ocon",
@@ -257,6 +291,7 @@ const teamPageData: TeamPageData = {
     ],
   },
 
+
   highlight: {
     title: "Highlight",
     subTitle: "Team Highlights (2020):",
@@ -270,6 +305,9 @@ const teamPageData: TeamPageData = {
     ],
   },
 };
+
+
+
 
 /* =========================================================
    4. ANIMATION CONFIG
@@ -309,7 +347,7 @@ const ANIMATION = {
   },
 
   storyReveal: {
-    scrollLength: 1800,
+    scrollLength: 2800,
     wordStagger: 0.025,
   },
 
@@ -478,27 +516,28 @@ export default function TeamPage() {
     };
   }, [canRenderScene]);
 
-  useGSAP(
-    () => {
-      if (!isPageReady || !pageRef.current) return;
+useGSAP(
+  () => {
+    if (!pageRef.current) return;
 
-      setupTopbarAnimation(teamPageData.theme);
-      setupHeroModelParallax();
-      setupHorizontalGallery(pageRef.current);
-      setupStoryRevealAnimation(teamPageData.theme);
-      setupCarDetailAnimations(pageRef.current);
+    setupTopbarAnimation(teamPageData.theme);
+    setupHeroModelParallax();
+    setupStoryRevealAnimation(teamPageData.theme);
+    setupHorizontalGallery(pageRef.current);
+    setupCarDetailAnimations(pageRef.current);
 
-      const cleanupRefresh = setupScrollTriggerRefresh();
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
 
-      return () => {
-        cleanupRefresh();
-      };
-    },
-    {
-      scope: pageRef,
-      dependencies: [isPageReady],
-    }
-  );
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  },
+  {
+    scope: pageRef,
+  }
+);
 
   return (
     <main
@@ -513,9 +552,9 @@ export default function TeamPage() {
 
       <HeroSection />
 
-      <HorizontalGallery data={teamPageData} />
-
       <StoryRevealSection data={teamPageData} storyWords={storyWords} />
+
+      <HorizontalGallery data={teamPageData} />
 
       <CarDetailSections data={teamPageData} />
     </main>
@@ -558,7 +597,7 @@ function HorizontalGallery({ data }: { data: TeamPageData }) {
               {item.label}
             </p>
 
-            <div className={cn("overflow-hidden", item.imageBoxClassName)}>
+            <div className={cn("overflow-hidden bg-black", item.imageBoxClassName)}>
               <img
                 src={item.src}
                 alt={item.alt}
@@ -836,11 +875,11 @@ function SecondaryDriverSection({ data }: { data: TeamPageData }) {
   return (
     <section
       className="relative z-10 flex w-full items-center overflow-hidden px-[5%] py-32"
-      style={{ backgroundColor: data.theme.surface, color: data.theme.text }}
+      style={{ backgroundColor: data.theme.surface, color: data.theme.accent }}
     >
-      <div 
+      <div
         className="gsap-slide-left flex w-[30%] flex-col justify-center pl-[5%] text-sm font-bold md:text-base"
-        style={{ color: data.theme.text }}
+        style={{ color: data.theme.accent }}
       >
         <h4
           className="mb-6 border-l-4 pl-4 text-xl uppercase tracking-widest"
@@ -848,11 +887,7 @@ function SecondaryDriverSection({ data }: { data: TeamPageData }) {
         >
           {driver.statsTitle}
           <br />
-          <span 
-            className="text-sm text-gray-500"
-          >
-            {driver.statsSubTitle}
-          </span>:
+          <span className="text-sm text-gray-500">{driver.statsSubTitle}</span>:
         </h4>
 
         <StatsList stats={driver.stats} accent={data.theme.accent} />
@@ -869,9 +904,9 @@ function SecondaryDriverSection({ data }: { data: TeamPageData }) {
       </div>
 
       <div className="gsap-slide-right flex w-[30%] flex-col justify-center pr-[5%]">
-        <h2 
+        <h2
           className="mb-6 text-4xl font-black uppercase tracking-wide xl:text-5xl"
-          style={{ color: data.theme.text }}
+          style={{ color: data.theme.accent }}
         >
           {driver.name.split(" ").map((part) => (
             <span key={part} className="block">
@@ -885,7 +920,7 @@ function SecondaryDriverSection({ data }: { data: TeamPageData }) {
           style={{ backgroundColor: data.theme.accent }}
         />
 
-        <p 
+        <p
           className="text-base font-medium leading-relaxed xl:text-lg"
           style={{ color: data.theme.mutedText }}
         >
@@ -1205,6 +1240,7 @@ function setupHorizontalGallery(pageElement: HTMLElement) {
           `+=${horizontalTrack.scrollWidth * ANIMATION.gallery.scrollLengthMultiplier}`,
         scrub: ANIMATION.gallery.scrub,
         pin: true,
+        pinSpacing: true,
         anticipatePin: 1,
         invalidateOnRefresh: true,
       },
@@ -1224,11 +1260,19 @@ function setupStoryRevealAnimation(theme: TeamTheme) {
       ease: "none",
       scrollTrigger: {
         trigger: SELECTORS.textRevealSection,
+
+        // Ghim text reveal ngay khi nó chạm đầu màn hình
         start: "top top",
+
+        // Tăng độ dài scroll của text reveal
+        // Nếu vẫn chưa đọc hết đã xuống gallery, tăng số này lên
         end: `+=${ANIMATION.storyReveal.scrollLength}`,
+
         scrub: true,
         pin: true,
+        pinSpacing: true,
         anticipatePin: 1,
+        invalidateOnRefresh: true,
       },
     }
   );

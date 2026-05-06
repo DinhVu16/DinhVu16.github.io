@@ -153,7 +153,7 @@ type TeamPageData = {
    - đổi text driver/story/highlight
 ========================================================= */
 const teamPageData: TeamPageData = {
-  teamName: "Alfa Romeo Racing ORLEN",
+  teamName: "ALFA ROMEO RACING ORLEN",
 
   // Đổi tên xe ở đây.
   carName: "C39",
@@ -178,53 +178,53 @@ const teamPageData: TeamPageData = {
   },
 
   images: {
-    heroCar: "/images/alfaromeo/anh-xe.png",
-    primaryDriverBackground: "/images/alfaromeo/pdb.png",
-    primaryDriverPortrait: "/images/alfaromeo/pdp.png",
-    secondaryDriverPortrait: "/images/alfaromeo/sdp.png",
-    highlightThumbnail: "/images/alfaromeo/thumbnail.png",
+    heroCar: "/images/alfaromeo/anh-xe.webp",
+    primaryDriverBackground: "/images/alfaromeo/pdb.webp",
+    primaryDriverPortrait: "/images/alfaromeo/pdp.webp",
+    secondaryDriverPortrait: "/images/alfaromeo/sdp.webp",
+    highlightThumbnail: "/images/alfaromeo/thumbnail.webp",
   },
 
   galleryItems: [
     {
       label: "Alfa Romeo / 2020",
-      src: "/images/alfaromeo/alfaromeo.jpg",
-      alt: "Alfa Romeo archive 1",
+      src: "/images/alfaromeo/alfaromeo-1.webp",
+      alt: "Alfa Romeo 1",
       cardClassName: "mt-[-18vh] w-[26vw]",
-      imageBoxClassName: "h-[58vh]",
+      imageBoxClassName: "aspect-[16/9]",
     },
     {
       label: "C39 Detail",
-      src: "/images/alfaromeo/alfaromeo.jpg",
-      alt: "Alfa Romeo archive 2",
+      src: "/images/alfaromeo/alfaromeo-2.webp",
+      alt: "Alfa Romeo 2",
       cardClassName: "mt-[12vh] w-[42vw]",
-      imageBoxClassName: "h-[64vh]",
+      imageBoxClassName: "aspect-[4/3]",
     },
     {
       label: "Chassis",
-      src: "/images/alfaromeo/alfaromeo.jpg",
-      alt: "Alfa Romeo archive 3",
+      src: "/images/alfaromeo/alfaromeo-3.webp",
+      alt: "Alfa Romeo 3",
       cardClassName: "mt-[-22vh] w-[22vw]",
-      imageBoxClassName: "h-[34vh]",
+      imageBoxClassName: "aspect-[16/9]",
     },
     {
       label: "Race Frame",
-      src: "/images/alfaromeo/alfaromeo.jpg",
-      alt: "Alfa Romeo archive 4",
+      src: "/images/alfaromeo/alfaromeo-4.webp",
+      alt: "Alfa Romeo 4",
       cardClassName: "mt-[20vh] w-[30vw]",
       imageBoxClassName: "h-[44vh]",
     },
     {
       label: "Alfa Romeo Detail",
-      src: "/images/alfaromeo/alfaromeo.jpg",
-      alt: "Alfa Romeo archive 5",
+      src: "/images/alfaromeo/alfaromeo-5.webp",
+      alt: "Alfa Romeo 5",
       cardClassName: "mt-[-10vh] w-[46vw]",
       imageBoxClassName: "h-[58vh]",
     },
     {
       label: "Engine Era",
-      src: "/images/alfaromeo/alfaromeo.jpg",
-      alt: "Alfa Romeo archive 6",
+      src: "/images/alfaromeo/alfaromeo-6.webp",
+      alt: "Alfa Romeo 6",
       cardClassName: "mt-[16vh] w-[24vw]",
       imageBoxClassName: "h-[36vh]",
     },
@@ -309,7 +309,7 @@ const ANIMATION = {
   },
 
   storyReveal: {
-    scrollLength: 1800,
+    scrollLength: 2800,
     wordStagger: 0.025,
   },
 
@@ -478,27 +478,28 @@ export default function TeamPage() {
     };
   }, [canRenderScene]);
 
-  useGSAP(
-    () => {
-      if (!isPageReady || !pageRef.current) return;
+useGSAP(
+  () => {
+    if (!pageRef.current) return;
 
-      setupTopbarAnimation(teamPageData.theme);
-      setupHeroModelParallax();
-      setupHorizontalGallery(pageRef.current);
-      setupStoryRevealAnimation(teamPageData.theme);
-      setupCarDetailAnimations(pageRef.current);
+    setupTopbarAnimation(teamPageData.theme);
+    setupHeroModelParallax();
+    setupStoryRevealAnimation(teamPageData.theme);
+    setupHorizontalGallery(pageRef.current);
+    setupCarDetailAnimations(pageRef.current);
 
-      const cleanupRefresh = setupScrollTriggerRefresh();
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
 
-      return () => {
-        cleanupRefresh();
-      };
-    },
-    {
-      scope: pageRef,
-      dependencies: [isPageReady],
-    }
-  );
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  },
+  {
+    scope: pageRef,
+  }
+);
 
   return (
     <main
@@ -513,9 +514,9 @@ export default function TeamPage() {
 
       <HeroSection />
 
-      <HorizontalGallery data={teamPageData} />
-
       <StoryRevealSection data={teamPageData} storyWords={storyWords} />
+
+      <HorizontalGallery data={teamPageData} />
 
       <CarDetailSections data={teamPageData} />
     </main>
@@ -558,7 +559,7 @@ function HorizontalGallery({ data }: { data: TeamPageData }) {
               {item.label}
             </p>
 
-            <div className={cn("overflow-hidden", item.imageBoxClassName)}>
+            <div className={cn("overflow-hidden bg-black", item.imageBoxClassName)}>
               <img
                 src={item.src}
                 alt={item.alt}
@@ -696,14 +697,14 @@ function CarHeaderSection({ data }: { data: TeamPageData }) {
 
           {/* Bảng season nằm ở gần cuối section 200vh */}
           <div
-            className="gsap-fade-up absolute bottom-[12vh] right-[8%] z-30 w-[380px] p-10 transition-transform duration-500 hover:-translate-y-2"
+            className="gsap-fade-up absolute bottom-[12vh] right-[8%] z-30 w-[480px] p-10 transition-transform duration-500 hover:-translate-y-2"
             style={{
               backgroundColor: data.theme.accent,
               boxShadow: getAccentShadow(data.theme.accent),
             }}
           >
             <h2
-              className="text-center text-[4rem] font-black uppercase leading-[1.05] tracking-wider"
+              className="text-[4rem] font-akira uppercase leading-[1.05] tracking-wider"
               style={{ color: data.theme.surface }}
             >
               {data.season}
@@ -836,11 +837,11 @@ function SecondaryDriverSection({ data }: { data: TeamPageData }) {
   return (
     <section
       className="relative z-10 flex w-full items-center overflow-hidden px-[5%] py-32"
-      style={{ backgroundColor: data.theme.surface, color: data.theme.text }}
+      style={{ backgroundColor: data.theme.surface, color: data.theme.accent }}
     >
-      <div 
+      <div
         className="gsap-slide-left flex w-[30%] flex-col justify-center pl-[5%] text-sm font-bold md:text-base"
-        style={{ color: data.theme.text }}
+        style={{ color: data.theme.accent }}
       >
         <h4
           className="mb-6 border-l-4 pl-4 text-xl uppercase tracking-widest"
@@ -848,11 +849,7 @@ function SecondaryDriverSection({ data }: { data: TeamPageData }) {
         >
           {driver.statsTitle}
           <br />
-          <span 
-            className="text-sm text-gray-500"
-          >
-            {driver.statsSubTitle}
-          </span>:
+          <span className="text-sm text-gray-500">{driver.statsSubTitle}</span>:
         </h4>
 
         <StatsList stats={driver.stats} accent={data.theme.accent} />
@@ -869,9 +866,9 @@ function SecondaryDriverSection({ data }: { data: TeamPageData }) {
       </div>
 
       <div className="gsap-slide-right flex w-[30%] flex-col justify-center pr-[5%]">
-        <h2 
+        <h2
           className="mb-6 text-4xl font-black uppercase tracking-wide xl:text-5xl"
-          style={{ color: data.theme.text }}
+          style={{ color: data.theme.accent }}
         >
           {driver.name.split(" ").map((part) => (
             <span key={part} className="block">
@@ -885,7 +882,7 @@ function SecondaryDriverSection({ data }: { data: TeamPageData }) {
           style={{ backgroundColor: data.theme.accent }}
         />
 
-        <p 
+        <p
           className="text-base font-medium leading-relaxed xl:text-lg"
           style={{ color: data.theme.mutedText }}
         >
@@ -1205,6 +1202,7 @@ function setupHorizontalGallery(pageElement: HTMLElement) {
           `+=${horizontalTrack.scrollWidth * ANIMATION.gallery.scrollLengthMultiplier}`,
         scrub: ANIMATION.gallery.scrub,
         pin: true,
+        pinSpacing: true,
         anticipatePin: 1,
         invalidateOnRefresh: true,
       },
@@ -1224,11 +1222,19 @@ function setupStoryRevealAnimation(theme: TeamTheme) {
       ease: "none",
       scrollTrigger: {
         trigger: SELECTORS.textRevealSection,
+
+        // Ghim text reveal ngay khi nó chạm đầu màn hình
         start: "top top",
+
+        // Tăng độ dài scroll của text reveal
+        // Nếu vẫn chưa đọc hết đã xuống gallery, tăng số này lên
         end: `+=${ANIMATION.storyReveal.scrollLength}`,
+
         scrub: true,
         pin: true,
+        pinSpacing: true,
         anticipatePin: 1,
+        invalidateOnRefresh: true,
       },
     }
   );

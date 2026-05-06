@@ -112,23 +112,21 @@ const TEAM_MODEL: TeamModelConfig = {
 // 2) THEME: toàn bộ màu chính của section nằm ở đây.
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
-  sectionBackground:
-      "linear-gradient(180deg, #061524 0%, #003049 55%, #00111D 100%)",
-  cinematicBar: "#00A3E0",
+    sectionBackground:
+      "linear-gradient(180deg, #00A3E0 0%, #0078A8 50%, #003049 100%)",
+    cinematicBar: "#061524",
+    backgroundTitleColor: "rgba(243, 250, 255, 0.22)",
+    viewTitleColor: "#F3FAFF",
+    mainText: "#F3FAFF",
+    line: "#F3FAFF",
 
-  backgroundTitleColor: "rgba(0, 163, 224, 0.3)",
-  viewTitleColor: "#F3FAFF",
+    buttonActiveBg: "#F3FAFF",
+    buttonActiveText: "#061524",
+    buttonActiveBorder: "#F3FAFF",
 
-  mainText: "#F3FAFF",
-  line: "#00A3E0",
-
-  buttonActiveBg: "#00A3E0",
-  buttonActiveText: "#061524",
-  buttonActiveBorder: "#00A3E0",
-
-  buttonIdleBg: "rgba(243, 250, 255, 0.08)",
-  buttonIdleText: "#F3FAFF",
-  buttonIdleBorder: "rgba(0, 163, 224, 0.45)",
+    buttonIdleBg: "rgba(243, 250, 255, 0.08)",
+    buttonIdleText: "#F3FAFF",
+    buttonIdleBorder: "rgba(243, 250, 255, 0.38)",
 };
 
 // =========================================================

@@ -113,22 +113,20 @@ const TEAM_MODEL: TeamModelConfig = {
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
     sectionBackground:
-      "linear-gradient(180deg, #111006 0%, #302D00 52%, #050500 100%)",
-    cinematicBar: "#FFF500",
+      "linear-gradient(180deg, #FFF500 0%, #D8D000 46%, #756F00 100%)",
+    cinematicBar: "#111006",
+    backgroundTitleColor: "rgba(17, 16, 6, 0.24)",
+    viewTitleColor: "#111006",
+    mainText: "#ffffff",
+    line: "#ffffff",
 
-    backgroundTitleColor: "rgba(255, 245, 0, 0.3)",
-    viewTitleColor: "#FFF500",
+    buttonActiveBg: "#111006",
+    buttonActiveText: "#FFF500",
+    buttonActiveBorder: "#111006",
 
-    mainText: "#FFF500",
-    line: "#FFF500",
-
-    buttonActiveBg: "#FFF500",
-    buttonActiveText: "#161300",
-    buttonActiveBorder: "#FFF500",
-
-    buttonIdleBg: "rgba(255, 245, 0, 0.08)",
-    buttonIdleText: "#FFF500",
-    buttonIdleBorder: "rgba(255, 245, 0, 0.45)",
+    buttonIdleBg: "rgba(17, 16, 6, 0.1)",
+    buttonIdleText: "#111006",
+    buttonIdleBorder: "rgba(17, 16, 6, 0.38)",
 };
 
 // =========================================================
@@ -138,7 +136,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   side: {
     title: "RENAULT",
     subtitle: "Renault DP World F1 Team",
-    titleColor: "rgba(255, 245, 0, 0.3)",
+    titleColor: "rgba(17, 16, 6, 0.24)",
     subtitleUseTitleColor: false,
 
     labelLeft: "ENGINEERED TO RETURN",
@@ -166,7 +164,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   front: {
     title: "R.S.20",
     subtitle: "Yellow Thunder",
-    titleColor: "#FFF500",
+    titleColor: "#111006",
 
     // Đây là dòng bạn cần: subtitle sẽ tự cùng màu với title SF1000.
     subtitleUseTitleColor: true,
@@ -197,7 +195,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   cockpit: {
     title: '"POWER IS BUILT THROUGH PATIENCE."',
     subtitle: "FERNANDO ALONSO",
-    titleColor: "#FFF500",
+    titleColor: "#ffffff",
     subtitleUseTitleColor: true,
 
     labelLeft: "",

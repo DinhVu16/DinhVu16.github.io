@@ -112,23 +112,21 @@ const TEAM_MODEL: TeamModelConfig = {
 // 2) THEME: toàn bộ màu chính của section nằm ở đây.
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
-  sectionBackground:
-    "linear-gradient(180deg, #FF8700 0%, #E46F00 52%, #4A2500 100%)",
-  cinematicBar: "#101010",
+    sectionBackground:
+      "linear-gradient(180deg, #FF9A1F 0%, #FF8700 45%, #B85700 100%)",
+    cinematicBar: "#120D08",
+    backgroundTitleColor: "rgba(18, 13, 8, 0.22)",
+    viewTitleColor: "#ffffff",
+    mainText: "#ffffff",
+    line: "#ffffff",
 
-  backgroundTitleColor: "rgba(255, 246, 232, 0.32)",
-  viewTitleColor: "#FFFFFF",
+    buttonActiveBg: "#120D08",
+    buttonActiveText: "#FFF6E8",
+    buttonActiveBorder: "#120D08",
 
-  mainText: "#FFFFFF",
-  line: "#FFFFFF",
-
-  buttonActiveBg: "#101010",
-  buttonActiveText: "#FFFFFF",
-  buttonActiveBorder: "#101010",
-
-  buttonIdleBg: "rgba(255, 255, 255, 0.12)",
-  buttonIdleText: "#FFFFFF",
-  buttonIdleBorder: "rgba(255, 255, 255, 0.45)",
+    buttonIdleBg: "rgba(18, 13, 8, 0.1)",
+    buttonIdleText: "#120D08",
+    buttonIdleBorder: "rgba(18, 13, 8, 0.38)",
 };
 
 // =========================================================
@@ -138,7 +136,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   side: {
     title: "MCLAREN",
     subtitle: "McLaren F1 Team",
-    titleColor: "rgba(255, 246, 232, 0.32)",
+    titleColor: "rgba(18, 13, 8, 0.22)",
     subtitleUseTitleColor: false,
 
     labelLeft: "PAPAYA RACING",

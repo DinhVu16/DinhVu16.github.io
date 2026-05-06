@@ -112,23 +112,21 @@ const TEAM_MODEL: TeamModelConfig = {
 // 2) THEME: toàn bộ màu chính của section nằm ở đây.
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
-  sectionBackground:
-    "linear-gradient(180deg, #050816 0%, #070B1A 55%, #02040D 100%)",
-  cinematicBar: "#FFCC00",
+    sectionBackground:
+      "linear-gradient(180deg, #132B8F 0%, #0B1E78 45%, #070B1A 100%)",
+    cinematicBar: "#070B1A",
+    backgroundTitleColor: "rgba(255, 204, 0, 0.20)",
+    viewTitleColor: "#FFDD44",
+    mainText: "#FFDD44",
+    line: "#FFDD44",
 
-  backgroundTitleColor: "rgba(255, 204, 0, 0.24)",
-  viewTitleColor: "#FFCC00",
+    buttonActiveBg: "#FFDD44",
+    buttonActiveText: "#070B1A",
+    buttonActiveBorder: "#FFDD44",
 
-  mainText: "#FFCC00",
-  line: "#FFCC00",
-
-  buttonActiveBg: "#FFCC00",
-  buttonActiveText: "#070B1A",
-  buttonActiveBorder: "#FFCC00",
-
-  buttonIdleBg: "rgba(255, 204, 0, 0.08)",
-  buttonIdleText: "#FFCC00",
-  buttonIdleBorder: "rgba(255, 204, 0, 0.45)",
+    buttonIdleBg: "rgba(255, 221, 68, 0.08)",
+    buttonIdleText: "#FFDD44",
+    buttonIdleBorder: "rgba(255, 221, 68, 0.38)",
 };
 
 // =========================================================
@@ -138,7 +136,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   side: {
     title: "REDBULL",
     subtitle: "Aston Martin Red Bull Racing",
-    titleColor: "rgba(255, 204, 0, 0.24)",
+    titleColor: "rgba(255, 204, 0, 0.20)",
     subtitleUseTitleColor: false,
 
     labelLeft: "BUILT TO ATTACK",
@@ -166,7 +164,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   front: {
     title: "RB16",
     subtitle: "Charging Bull",
-    titleColor: "#FFCC00",
+    titleColor: "#FFDD44",
 
     // Đây là dòng bạn cần: subtitle sẽ tự cùng màu với title SF1000.
     subtitleUseTitleColor: true,
@@ -197,7 +195,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   cockpit: {
     title: '"PUSH THE LIMIT, THEN PUSH AGAIN."',
     subtitle: "MAX VERSTAPPEN",
-    titleColor: "#FFCC00",
+    titleColor: "#FFDD44",
     subtitleUseTitleColor: true,
 
     labelLeft: "",

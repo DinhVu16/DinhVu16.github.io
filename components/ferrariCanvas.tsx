@@ -112,23 +112,21 @@ const TEAM_MODEL: TeamModelConfig = {
 // 2) THEME: toàn bộ màu chính của section nằm ở đây.
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
-  sectionBackground:
-      "linear-gradient(180deg, #E10600 0%, #C90000 52%, #7A0000 100%)",
-  cinematicBar: "#FFFFFF",
+    sectionBackground:
+      "linear-gradient(180deg, #E10600 0%, #C90000 52%, #8B0000 100%)",
+    cinematicBar: "#F8F3EF",
+    backgroundTitleColor: "rgba(255, 235, 235, 0.30)",
+    viewTitleColor: "#FFFFFF",
+    mainText: "#FFFFFF",
+    line: "#FFFFFF",
 
-  backgroundTitleColor: "rgba(255, 235, 235, 0.36)",
-  viewTitleColor: "#FFFFFF",
+    buttonActiveBg: "#FFFFFF",
+    buttonActiveText: "#111111",
+    buttonActiveBorder: "#FFFFFF",
 
-  mainText: "#FFFFFF",
-  line: "#FFFFFF",
-
-  buttonActiveBg: "#FFFFFF",
-  buttonActiveText: "#111111",
-  buttonActiveBorder: "#FFFFFF",
-
-  buttonIdleBg: "rgba(255, 255, 255, 0.08)",
-  buttonIdleText: "#FFFFFF",
-  buttonIdleBorder: "rgba(255, 255, 255, 0.42)",
+    buttonIdleBg: "rgba(255, 255, 255, 0.08)",
+    buttonIdleText: "#FFFFFF",
+    buttonIdleBorder: "rgba(255, 255, 255, 0.4)",
 };
 
 // =========================================================
@@ -138,7 +136,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   side: {
     title: "FERRARI",
     subtitle: "SCUDERIA FERRARI",
-    titleColor: "rgba(255, 235, 235, 0.36)",
+    titleColor: "rgba(255, 235, 235, 0.30)",
     subtitleUseTitleColor: false,
 
     labelLeft: "LEGACY SINCE 1929",

@@ -112,23 +112,23 @@ const TEAM_MODEL: TeamModelConfig = {
 // 2) THEME: toàn bộ màu chính của section nằm ở đây.
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
-  sectionBackground:
-    "linear-gradient(180deg, #07101F 0%, #142235 55%, #020713 100%)",
-  cinematicBar: "#F3F7FF",
+sectionBackground:
+    "linear-gradient(180deg, #DCE6F2 0%, #BFCFE0 48%, #8EA3BB 100%)",
+  cinematicBar: "#07101F",
 
-  backgroundTitleColor: "rgba(243, 247, 255, 0.25)",
-  viewTitleColor: "#F3F7FF",
+  backgroundTitleColor: "rgba(7, 16, 31, 0.16)",
+  viewTitleColor: "#07101F",
 
-  mainText: "#F3F7FF",
-  line: "#F3F7FF",
+  mainText: "#07101F",
+  line: "#07101F",
 
-  buttonActiveBg: "#F3F7FF",
-  buttonActiveText: "#07101F",
-  buttonActiveBorder: "#F3F7FF",
+  buttonActiveBg: "#07101F",
+  buttonActiveText: "#F3F7FF",
+  buttonActiveBorder: "#07101F",
 
-  buttonIdleBg: "rgba(243, 247, 255, 0.08)",
-  buttonIdleText: "#F3F7FF",
-  buttonIdleBorder: "rgba(243, 247, 255, 0.42)",
+  buttonIdleBg: "rgba(7, 16, 31, 0.08)",
+  buttonIdleText: "#07101F",
+  buttonIdleBorder: "rgba(7, 16, 31, 0.24)",
 };
 
 // =========================================================
@@ -138,7 +138,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   side: {
     title: "ALPHATAURI",
     subtitle: "Scuderia AlphaTauri Honda",
-    titleColor: "rgba(243, 247, 255, 0.25)",
+    titleColor: "rgba(7, 16, 31, 0.16)",
     subtitleUseTitleColor: false,
 
     labelLeft: "FASHION MEETS SPEED",
@@ -166,7 +166,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   front: {
     title: "AT01",
     subtitle: "Blue Strike",
-    titleColor: "#F3F7FF",
+    titleColor: "#07101F",
 
     // Đây là dòng bạn cần: subtitle sẽ tự cùng màu với title SF1000.
     subtitleUseTitleColor: true,
@@ -197,7 +197,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   cockpit: {
     title: '"PRECISION TURNS SPEED INTO STYLE."',
     subtitle: "PIERRE GASLY",
-    titleColor: "#F3F7FF",
+    titleColor: "#07101F",
     subtitleUseTitleColor: true,
 
     labelLeft: "",

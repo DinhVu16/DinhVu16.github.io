@@ -12,10 +12,12 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 ========================================================= */
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
+
 /* =========================================================
    1. 3D MODEL
    ---------------------------------------------------------
    Muốn đổi model/canvas cho xe khác thì đổi dòng import này.
+
 
    Ví dụ:
    Ferrari:    "../../../components/ferrariCanvas"
@@ -25,6 +27,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const TeamScene = dynamic(() => import("../../../components/alphatauriCanvas"), {
   ssr: false,
 });
+
 
 /* =========================================================
    2. TYPES
@@ -37,9 +40,12 @@ type GalleryItem = {
   imageBoxClassName: string;
 };
 
+
 type DriverStats = [label: string, value: string];
 
+
 type HighlightItem = [label: string, value: string, note: string];
+
 
 type TeamTheme = {
   /**
@@ -48,11 +54,13 @@ type TeamTheme = {
    */
   pageBackground: string;
 
+
   /**
    * surface:
    * Màu nền các section thông tin xe/tay đua.
    */
   surface: string;
+
 
   /**
    * text / mutedText:
@@ -61,11 +69,13 @@ type TeamTheme = {
   text: string;
   mutedText: string;
 
+
   /**
    * accent:
    * Màu chính của team/xe.
    */
   accent: string;
+
 
   /**
    * accentDark:
@@ -73,11 +83,13 @@ type TeamTheme = {
    */
   accentDark: string;
 
+
   /**
    * footerAccent:
    * Màu footer cuối trang.
    */
   footerAccent: string;
+
 
   /**
    * storyBefore / storyAfter:
@@ -87,6 +99,7 @@ type TeamTheme = {
   storyAfter: string;
 };
 
+
 type TeamPageData = {
   /**
    * ĐỔI TÊN XE Ở ĐÂY.
@@ -95,15 +108,20 @@ type TeamPageData = {
    */
   carName: string;
 
+
   teamName: string;
   season: string;
+
 
   logoSrc: string;
   logoAlt: string;
 
+
   storyLabelLeft: string;
 
+
   theme: TeamTheme;
+
 
   images: {
     heroCar: string;
@@ -113,9 +131,12 @@ type TeamPageData = {
     highlightThumbnail: string;
   };
 
+
   galleryItems: GalleryItem[];
 
+
   storyText: string;
+
 
   primaryDriver: {
     name: string;
@@ -123,6 +144,7 @@ type TeamPageData = {
     videoLabel: string;
     description: string;
   };
+
 
   secondaryDriver: {
     name: string;
@@ -132,6 +154,7 @@ type TeamPageData = {
     stats: DriverStats[];
   };
 
+
   highlight: {
     title: string;
     subTitle: string;
@@ -140,6 +163,7 @@ type TeamPageData = {
     items: HighlightItem[];
   };
 };
+
 
 /* =========================================================
    3. TEAM DATA — CHỈNH NỘI DUNG CHÍNH Ở ĐÂY
@@ -153,85 +177,94 @@ type TeamPageData = {
    - đổi text driver/story/highlight
 ========================================================= */
 const teamPageData: TeamPageData = {
-  teamName: "Scuderia AlphaTauri Honda",
+  teamName: "SCUDERIA ALPHATAURI HONDA",
+
 
   // Đổi tên xe ở đây.
   carName: "AT01",
 
+
   season: "2020",
+
 
   logoSrc: "/logos/alphatauri.svg",
   logoAlt: "AlphaTauri logo",
 
+
   storyLabelLeft: "The Story",
+
 
   theme: {
     pageBackground: "#07101F",
     surface: "#F3F7FF",
     text: "#F3F7FF",
     mutedText: "#A8B7C9",
-    accent: "#2B4562",
-    accentDark: "#142235",
+    accent: "#3a5e87",
+    accentDark: "#0f1a2a",
     footerAccent: "#101827",
     storyBefore: "rgba(43, 69, 98, 0.18)",
     storyAfter: "#F3F7FF",
   },
 
+
   images: {
-    heroCar: "/images/anh-xe.avif",
-    primaryDriverBackground: "/images/seb.jpg",
-    primaryDriverPortrait: "/images/ve.jpg",
-    secondaryDriverPortrait: "/images/le.jpg",
-    highlightThumbnail: "/images/thumbnail.jpg",
+    heroCar: "/images/alphatauri/anh-xe.webp",
+    primaryDriverBackground: "/images/alphatauri/pdb.webp",
+    primaryDriverPortrait: "/images/alphatauri/pdp.webp",
+    secondaryDriverPortrait: "/images/alphatauri/sdp.webp",
+    highlightThumbnail: "/images/alphatauri/thumbnail.webp",
   },
+
 
   galleryItems: [
     {
       label: "AlphaTauri / 2020",
-      src: "/images/alphatauri.jpg",
+      src: "/images/alphatauri/alphatauri-1.webp",
       alt: "AlphaTauri archive 1",
       cardClassName: "mt-[-18vh] w-[26vw]",
-      imageBoxClassName: "h-[58vh]",
+      imageBoxClassName: "aspect-[16/9]",
     },
     {
       label: "AT01 Detail",
-      src: "/images/alphatauri.jpg",
+      src: "/images/alphatauri/alphatauri-2.webp",
       alt: "AlphaTauri archive 2",
       cardClassName: "mt-[12vh] w-[42vw]",
-      imageBoxClassName: "h-[64vh]",
+      imageBoxClassName: "aspect-[16/9]",
     },
     {
       label: "Chassis",
-      src: "/images/alphatauri.jpg",
+      src: "/images/alphatauri/alphatauri-3.webp",
       alt: "AlphaTauri archive 3",
       cardClassName: "mt-[-22vh] w-[22vw]",
-      imageBoxClassName: "h-[34vh]",
+      imageBoxClassName: "aspect-[16/9]",
     },
     {
       label: "Race Frame",
-      src: "/images/alphatauri.jpg",
+      src: "/images/alphatauri/alphatauri-4.webp",
       alt: "AlphaTauri archive 4",
       cardClassName: "mt-[20vh] w-[30vw]",
       imageBoxClassName: "h-[44vh]",
     },
     {
       label: "AlphaTauri Detail",
-      src: "/images/alphatauri.jpg",
+      src: "/images/alphatauri/alphatauri-5.webp",
       alt: "AlphaTauri archive 5",
       cardClassName: "mt-[-10vh] w-[46vw]",
       imageBoxClassName: "h-[58vh]",
     },
     {
       label: "Engine Era",
-      src: "/images/alphatauri.jpg",
+      src: "/images/alphatauri/alphatauri-6.webp",
       alt: "AlphaTauri archive 6",
       cardClassName: "mt-[16vh] w-[24vw]",
       imageBoxClassName: "h-[36vh]",
     },
   ],
 
+
   storyText:
     "Formerly known as Toro Rosso, the team rebranded to promote Red Bull's fashion label. The white-and-navy AT01 was not just a fashion statement; it was a serious contender. The highlight of their season (and one of the season's best moments) was Pierre Gasly’s emotional victory at the Italian Grand Prix in Monza.",
+
 
   primaryDriver: {
     name: "Pierre Gasly",
@@ -240,6 +273,7 @@ const teamPageData: TeamPageData = {
     description:
       "Delivered a breakthrough season with mature racecraft, strong consistency, and a sensational victory at Monza. His performances made 2020 the defining year of his Formula 1 comeback.",
   },
+
 
   secondaryDriver: {
     name: "Daniil Kvyat",
@@ -256,6 +290,7 @@ const teamPageData: TeamPageData = {
       ["Standings", "14th"],
     ],
   },
+
 
   highlight: {
     title: "Highlight",
@@ -309,7 +344,7 @@ const ANIMATION = {
   },
 
   storyReveal: {
-    scrollLength: 1800,
+    scrollLength: 2800,
     wordStagger: 0.025,
   },
 
@@ -478,27 +513,28 @@ export default function TeamPage() {
     };
   }, [canRenderScene]);
 
-  useGSAP(
-    () => {
-      if (!isPageReady || !pageRef.current) return;
+useGSAP(
+  () => {
+    if (!pageRef.current) return;
 
-      setupTopbarAnimation(teamPageData.theme);
-      setupHeroModelParallax();
-      setupHorizontalGallery(pageRef.current);
-      setupStoryRevealAnimation(teamPageData.theme);
-      setupCarDetailAnimations(pageRef.current);
+    setupTopbarAnimation(teamPageData.theme);
+    setupHeroModelParallax();
+    setupStoryRevealAnimation(teamPageData.theme);
+    setupHorizontalGallery(pageRef.current);
+    setupCarDetailAnimations(pageRef.current);
 
-      const cleanupRefresh = setupScrollTriggerRefresh();
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
 
-      return () => {
-        cleanupRefresh();
-      };
-    },
-    {
-      scope: pageRef,
-      dependencies: [isPageReady],
-    }
-  );
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  },
+  {
+    scope: pageRef,
+  }
+);
 
   return (
     <main
@@ -513,9 +549,9 @@ export default function TeamPage() {
 
       <HeroSection />
 
-      <HorizontalGallery data={teamPageData} />
-
       <StoryRevealSection data={teamPageData} storyWords={storyWords} />
+
+      <HorizontalGallery data={teamPageData} />
 
       <CarDetailSections data={teamPageData} />
     </main>
@@ -558,7 +594,7 @@ function HorizontalGallery({ data }: { data: TeamPageData }) {
               {item.label}
             </p>
 
-            <div className={cn("overflow-hidden", item.imageBoxClassName)}>
+            <div className={cn("overflow-hidden bg-black", item.imageBoxClassName)}>
               <img
                 src={item.src}
                 alt={item.alt}
@@ -836,11 +872,11 @@ function SecondaryDriverSection({ data }: { data: TeamPageData }) {
   return (
     <section
       className="relative z-10 flex w-full items-center overflow-hidden px-[5%] py-32"
-      style={{ backgroundColor: data.theme.surface, color: data.theme.text }}
+      style={{ backgroundColor: data.theme.surface, color: data.theme.accent }}
     >
-      <div 
+      <div
         className="gsap-slide-left flex w-[30%] flex-col justify-center pl-[5%] text-sm font-bold md:text-base"
-        style={{ color: data.theme.text }}
+        style={{ color: data.theme.accent }}
       >
         <h4
           className="mb-6 border-l-4 pl-4 text-xl uppercase tracking-widest"
@@ -848,11 +884,7 @@ function SecondaryDriverSection({ data }: { data: TeamPageData }) {
         >
           {driver.statsTitle}
           <br />
-          <span 
-            className="text-sm text-gray-500"
-          >
-            {driver.statsSubTitle}
-          </span>:
+          <span className="text-sm text-gray-500">{driver.statsSubTitle}</span>:
         </h4>
 
         <StatsList stats={driver.stats} accent={data.theme.accent} />
@@ -869,9 +901,9 @@ function SecondaryDriverSection({ data }: { data: TeamPageData }) {
       </div>
 
       <div className="gsap-slide-right flex w-[30%] flex-col justify-center pr-[5%]">
-        <h2 
+        <h2
           className="mb-6 text-4xl font-black uppercase tracking-wide xl:text-5xl"
-          style={{ color: data.theme.text }}
+          style={{ color: data.theme.accent }}
         >
           {driver.name.split(" ").map((part) => (
             <span key={part} className="block">
@@ -885,7 +917,7 @@ function SecondaryDriverSection({ data }: { data: TeamPageData }) {
           style={{ backgroundColor: data.theme.accent }}
         />
 
-        <p 
+        <p
           className="text-base font-medium leading-relaxed xl:text-lg"
           style={{ color: data.theme.mutedText }}
         >
@@ -1205,6 +1237,7 @@ function setupHorizontalGallery(pageElement: HTMLElement) {
           `+=${horizontalTrack.scrollWidth * ANIMATION.gallery.scrollLengthMultiplier}`,
         scrub: ANIMATION.gallery.scrub,
         pin: true,
+        pinSpacing: true,
         anticipatePin: 1,
         invalidateOnRefresh: true,
       },
@@ -1224,11 +1257,19 @@ function setupStoryRevealAnimation(theme: TeamTheme) {
       ease: "none",
       scrollTrigger: {
         trigger: SELECTORS.textRevealSection,
+
+        // Ghim text reveal ngay khi nó chạm đầu màn hình
         start: "top top",
+
+        // Tăng độ dài scroll của text reveal
+        // Nếu vẫn chưa đọc hết đã xuống gallery, tăng số này lên
         end: `+=${ANIMATION.storyReveal.scrollLength}`,
+
         scrub: true,
         pin: true,
+        pinSpacing: true,
         anticipatePin: 1,
+        invalidateOnRefresh: true,
       },
     }
   );

@@ -112,23 +112,21 @@ const TEAM_MODEL: TeamModelConfig = {
 // 2) THEME: toàn bộ màu chính của section nằm ở đây.
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
-  sectionBackground:
-      "linear-gradient(180deg, #071C1C 0%, #003B37 52%, #000F0E 100%)",
-  cinematicBar: "#00D2BE",
+    sectionBackground:
+      "linear-gradient(180deg, #00B8AD 0%, #008F87 42%, #056C67 72%, #034B47 100%)",
+    cinematicBar: "#071C1C",
+    backgroundTitleColor: "rgba(243, 255, 253, 0.16)",
+    viewTitleColor: "#F3FFFD",
+    mainText: "#F3FFFD",
+    line: "#F3FFFD",
 
-  backgroundTitleColor: "rgba(0, 210, 190, 0.32)",
-  viewTitleColor: "#F3FFFD",
+    buttonActiveBg: "#071C1C",
+    buttonActiveText: "#F3FFFD",
+    buttonActiveBorder: "#071C1C",
 
-  mainText: "#F3FFFD",
-  line: "#00D2BE",
-
-  buttonActiveBg: "#00D2BE",
-  buttonActiveText: "#061B1B",
-  buttonActiveBorder: "#00D2BE",
-
-  buttonIdleBg: "rgba(243, 255, 253, 0.08)",
-  buttonIdleText: "#F3FFFD",
-  buttonIdleBorder: "rgba(0, 210, 190, 0.45)",
+    buttonIdleBg: "rgba(7, 28, 28, 0.16)",
+    buttonIdleText: "#F3FFFD",
+    buttonIdleBorder: "rgba(243, 255, 253, 0.35)",
 };
 
 // =========================================================
@@ -138,7 +136,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   side: {
     title: "MERCEDES",
     subtitle: "Mercedes-AMG Petronas Formula One Team",
-    titleColor: "rgba(0, 210, 190, 0.32)",
+    titleColor: "rgba(243, 255, 253, 0.16)",
     subtitleUseTitleColor: false,
 
     labelLeft: "HYBRID ERA DOMINANCE",

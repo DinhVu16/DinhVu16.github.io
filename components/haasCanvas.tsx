@@ -113,12 +113,10 @@ const TEAM_MODEL: TeamModelConfig = {
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
     sectionBackground:
-      "linear-gradient(180deg, #F4F4F4 0%, #FFFFFF 48%, #CFCFCF 100%)",
-    cinematicBar: "#C8102E",
-
-    backgroundTitleColor: "rgba(200, 16, 46, 0.22)",
+      "linear-gradient(180deg, #FFFFFF 0%, #F4F4F4 50%, #D6D6D6 100%)",
+    cinematicBar: "#F4F4F4",
+    backgroundTitleColor: "rgba(200, 16, 46, 0.20)",
     viewTitleColor: "#C8102E",
-
     mainText: "#C8102E",
     line: "#C8102E",
 
@@ -128,7 +126,7 @@ const TEAM_THEME: CanvasTheme = {
 
     buttonIdleBg: "rgba(255, 255, 255, 0.72)",
     buttonIdleText: "#111111",
-    buttonIdleBorder: "rgba(200, 16, 46, 0.45)",
+    buttonIdleBorder: "rgba(200, 16, 46, 0.35)",
 };
 
 // =========================================================
@@ -138,7 +136,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   side: {
     title: "HAAS",
     subtitle: "Haas F1 Team",
-    titleColor: "rgba(200, 16, 46, 0.22)",
+    titleColor: "rgba(200, 16, 46, 0.20)",
     subtitleUseTitleColor: false,
 
     labelLeft: "AMERICAN OUTSIDER",
