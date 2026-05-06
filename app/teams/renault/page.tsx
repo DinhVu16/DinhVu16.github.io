@@ -735,14 +735,14 @@ function CarHeaderSection({ data }: { data: TeamPageData }) {
 
           {/* Bảng season nằm ở gần cuối section 200vh */}
           <div
-            className="gsap-fade-up absolute bottom-[12vh] right-[8%] z-30 w-[380px] p-10 transition-transform duration-500 hover:-translate-y-2"
+            className="gsap-fade-up absolute bottom-[12vh] right-[8%] z-30 w-[480px] p-10 transition-transform duration-500 hover:-translate-y-2"
             style={{
               backgroundColor: data.theme.accent,
               boxShadow: getAccentShadow(data.theme.accent),
             }}
           >
             <h2
-              className="text-center text-[4rem] font-black uppercase leading-[1.05] tracking-wider"
+              className="text-[4rem] font-black uppercase leading-[1.05] tracking-wider"
               style={{ color: data.theme.surface }}
             >
               {data.season}
