@@ -1,0 +1,325 @@
+{
+  "season": 2020,
+
+  "drivers": [
+    {
+      "pos": 1,
+      "name": "Lewis Hamilton",
+      "team": "Mercedes",
+      "points": 347,
+      "wins": 11
+    },
+    {
+      "pos": 2,
+      "name": "Valtteri Bottas",
+      "team": "Mercedes",
+      "points": 223,
+      "wins": 2
+    },
+    {
+      "pos": 3,
+      "name": "Max Verstappen",
+      "team": "Red Bull Racing",
+      "points": 214,
+      "wins": 2
+    },
+    {
+      "pos": 4,
+      "name": "Sergio Perez",
+      "team": "Racing Point",
+      "points": 125,
+      "wins": 1
+    },
+    {
+      "pos": 5,
+      "name": "Daniel Ricciardo",
+      "team": "Renault",
+      "points": 119,
+      "wins": 0
+    },
+    {
+      "pos": 6,
+      "name": "Carlos Sainz",
+      "team": "McLaren",
+      "points": 105,
+      "wins": 0
+    },
+    {
+      "pos": 7,
+      "name": "Alexander Albon",
+      "team": "Red Bull Racing",
+      "points": 105,
+      "wins": 0
+    },
+    {
+      "pos": 8,
+      "name": "Charles Leclerc",
+      "team": "Ferrari",
+      "points": 98,
+      "wins": 0
+    },
+    {
+      "pos": 9,
+      "name": "Lando Norris",
+      "team": "McLaren",
+      "points": 97,
+      "wins": 0
+    },
+    {
+      "pos": 10,
+      "name": "Pierre Gasly",
+      "team": "AlphaTauri",
+      "points": 75,
+      "wins": 1
+    },
+    {
+      "pos": 11,
+      "name": "Lance Stroll",
+      "team": "Racing Point",
+      "points": 75,
+      "wins": 0
+    },
+    {
+      "pos": 12,
+      "name": "Esteban Ocon",
+      "team": "Renault",
+      "points": 62,
+      "wins": 0
+    },
+    {
+      "pos": 13,
+      "name": "Sebastian Vettel",
+      "team": "Ferrari",
+      "points": 33,
+      "wins": 0
+    },
+    {
+      "pos": 14,
+      "name": "Daniil Kvyat",
+      "team": "AlphaTauri",
+      "points": 32,
+      "wins": 0
+    },
+    {
+      "pos": 15,
+      "name": "Kimi Raikkonen",
+      "team": "Alfa Romeo",
+      "points": 4,
+      "wins": 0
+    },
+    {
+      "pos": 16,
+      "name": "Antonio Giovinazzi",
+      "team": "Alfa Romeo",
+      "points": 4,
+      "wins": 0
+    },
+    {
+      "pos": 17,
+      "name": "George Russell",
+      "team": "Williams",
+      "points": 0,
+      "wins": 0
+    },
+    {
+      "pos": 18,
+      "name": "Romain Grosjean",
+      "team": "Haas",
+      "points": 2,
+      "wins": 0
+    },
+    {
+      "pos": 19,
+      "name": "Kevin Magnussen",
+      "team": "Haas",
+      "points": 1,
+      "wins": 0
+    },
+    {
+      "pos": 20,
+      "name": "Nicholas Latifi",
+      "team": "Williams",
+      "points": 0,
+      "wins": 0
+    }
+  ],
+
+  "constructors": [
+    { "pos": 1, "team": "Mercedes", "points": 573 },
+    { "pos": 2, "team": "Red Bull Racing", "points": 319 },
+    { "pos": 3, "team": "McLaren", "points": 202 },
+    { "pos": 4, "team": "Racing Point", "points": 195 },
+    { "pos": 5, "team": "Renault", "points": 181 },
+    { "pos": 6, "team": "Ferrari", "points": 131 },
+    { "pos": 7, "team": "AlphaTauri", "points": 107 },
+    { "pos": 8, "team": "Alfa Romeo", "points": 8 },
+    { "pos": 9, "team": "Haas", "points": 3 },
+    { "pos": 10, "team": "Williams", "points": 0 }
+  ],
+
+  "stats": {
+    "worldChampion": "Lewis Hamilton",
+    "constructorChampion": "Mercedes",
+    "totalRaces": 17,
+    "mostWinsDriver": {
+      "name": "Lewis Hamilton",
+      "wins": 11
+    }
+  },
+
+  "races": [
+    {
+      "round": 1,
+      "name": "Austrian Grand Prix",
+      "track": "Red Bull Ring",
+      "location": "Austria",
+      "date": "2020-07-05",
+      "laps": 71,
+      "winner": "Valtteri Bottas"
+    },
+    {
+      "round": 2,
+      "name": "Styrian Grand Prix",
+      "track": "Red Bull Ring",
+      "location": "Austria",
+      "date": "2020-07-12",
+      "laps": 71,
+      "winner": "Lewis Hamilton"
+    },
+    {
+      "round": 3,
+      "name": "Hungarian Grand Prix",
+      "track": "Hungaroring",
+      "location": "Hungary",
+      "date": "2020-07-19",
+      "laps": 70,
+      "winner": "Lewis Hamilton"
+    },
+    {
+      "round": 4,
+      "name": "British Grand Prix",
+      "track": "Silverstone Circuit",
+      "location": "UK",
+      "date": "2020-08-02",
+      "laps": 52,
+      "winner": "Lewis Hamilton"
+    },
+    {
+      "round": 5,
+      "name": "70th Anniversary Grand Prix",
+      "track": "Silverstone Circuit",
+      "location": "UK",
+      "date": "2020-08-09",
+      "laps": 52,
+      "winner": "Max Verstappen"
+    },
+    {
+      "round": 6,
+      "name": "Spanish Grand Prix",
+      "track": "Circuit de Barcelona-Catalunya",
+      "location": "Spain",
+      "date": "2020-08-16",
+      "laps": 66,
+      "winner": "Lewis Hamilton"
+    },
+    {
+      "round": 7,
+      "name": "Belgian Grand Prix",
+      "track": "Circuit de Spa-Francorchamps",
+      "location": "Belgium",
+      "date": "2020-08-30",
+      "laps": 44,
+      "winner": "Lewis Hamilton"
+    },
+    {
+      "round": 8,
+      "name": "Italian Grand Prix",
+      "track": "Autodromo Nazionale Monza",
+      "location": "Italy",
+      "date": "2020-09-06",
+      "laps": 53,
+      "winner": "Pierre Gasly"
+    },
+    {
+      "round": 9,
+      "name": "Tuscan Grand Prix",
+      "track": "Mugello Circuit",
+      "location": "Italy",
+      "date": "2020-09-13",
+      "laps": 59,
+      "winner": "Lewis Hamilton"
+    },
+    {
+      "round": 10,
+      "name": "Russian Grand Prix",
+      "track": "Sochi Autodrom",
+      "location": "Russia",
+      "date": "2020-09-27",
+      "laps": 53,
+      "winner": "Valtteri Bottas"
+    },
+    {
+      "round": 11,
+      "name": "Eifel Grand Prix",
+      "track": "Nürburgring",
+      "location": "Germany",
+      "date": "2020-10-11",
+      "laps": 60,
+      "winner": "Lewis Hamilton"
+    },
+    {
+      "round": 12,
+      "name": "Portuguese Grand Prix",
+      "track": "Algarve International Circuit",
+      "location": "Portugal",
+      "date": "2020-10-25",
+      "laps": 66,
+      "winner": "Lewis Hamilton"
+    },
+    {
+      "round": 13,
+      "name": "Emilia Romagna Grand Prix",
+      "track": "Imola Circuit",
+      "location": "Italy",
+      "date": "2020-11-01",
+      "laps": 63,
+      "winner": "Lewis Hamilton"
+    },
+    {
+      "round": 14,
+      "name": "Turkish Grand Prix",
+      "track": "Istanbul Park",
+      "location": "Turkey",
+      "date": "2020-11-15",
+      "laps": 58,
+      "winner": "Lewis Hamilton"
+    },
+    {
+      "round": 15,
+      "name": "Bahrain Grand Prix",
+      "track": "Bahrain International Circuit",
+      "location": "Bahrain",
+      "date": "2020-11-29",
+      "laps": 57,
+      "winner": "Lewis Hamilton"
+    },
+    {
+      "round": 16,
+      "name": "Sakhir Grand Prix",
+      "track": "Bahrain Outer Circuit",
+      "location": "Bahrain",
+      "date": "2020-12-06",
+      "laps": 87,
+      "winner": "Sergio Perez"
+    },
+    {
+      "round": 17,
+      "name": "Abu Dhabi Grand Prix",
+      "track": "Yas Marina Circuit",
+      "location": "UAE",
+      "date": "2020-12-13",
+      "laps": 55,
+      "winner": "Max Verstappen"
+    }
+  ]
+}

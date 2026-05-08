@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Bebas_Neue } from "next/font/google";
 import localFont from "next/font/local";
 import TransitionFunc from "../transition/transition";
+import StaticSwipeBootSequence from "@/components/BootSequence";
 import "./globals.css";
 import Topbar from "@/components/Topbar";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +14,12 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas-neue",
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -33,13 +41,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${AkiraExpanded.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${AkiraExpanded.variable} ${bebasNeue.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col overflow-y-scroll no-scrollbar">
-
+        <StaticSwipeBootSequence />
         <Topbar />
-
-        <TransitionFunc>{children}</TransitionFunc>
+        <TransitionFunc>
+          {children}
+        </TransitionFunc>
       </body>
     </html>
   );
