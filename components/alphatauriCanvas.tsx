@@ -1,6 +1,6 @@
 "use client";
 
-import { SceneManager } from "../renders/ferrari";
+import { SceneManager } from "../renders/render";
 import { startMainShow, triggerCameraView } from "../hook/hero-anim";
 import { useMemo, useRef, useState } from "react";
 import type { CSSProperties, RefObject } from "react";
@@ -112,23 +112,23 @@ const TEAM_MODEL: TeamModelConfig = {
 // 2) THEME: toàn bộ màu chính của section nằm ở đây.
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
-sectionBackground:
-    "linear-gradient(180deg, #DCE6F2 0%, #BFCFE0 48%, #8EA3BB 100%)",
-  cinematicBar: "#07101F",
+  sectionBackground:
+    "linear-gradient(180deg, #07101F 0%, #142235 55%, #020713 100%)",
+  cinematicBar: "#F3F7FF",
 
-  backgroundTitleColor: "rgba(7, 16, 31, 0.16)",
-  viewTitleColor: "#07101F",
+  backgroundTitleColor: "rgba(243, 247, 255, 0.25)",
+  viewTitleColor: "#F3F7FF",
 
-  mainText: "#07101F",
-  line: "#07101F",
+  mainText: "#F3F7FF",
+  line: "#F3F7FF",
 
-  buttonActiveBg: "#07101F",
-  buttonActiveText: "#F3F7FF",
-  buttonActiveBorder: "#07101F",
+  buttonActiveBg: "#F3F7FF",
+  buttonActiveText: "#07101F",
+  buttonActiveBorder: "#F3F7FF",
 
-  buttonIdleBg: "rgba(7, 16, 31, 0.08)",
-  buttonIdleText: "#07101F",
-  buttonIdleBorder: "rgba(7, 16, 31, 0.24)",
+  buttonIdleBg: "rgba(243, 247, 255, 0.08)",
+  buttonIdleText: "#F3F7FF",
+  buttonIdleBorder: "rgba(243, 247, 255, 0.42)",
 };
 
 // =========================================================
@@ -138,7 +138,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   side: {
     title: "ALPHATAURI",
     subtitle: "Scuderia AlphaTauri Honda",
-    titleColor: "rgba(7, 16, 31, 0.16)",
+    titleColor: "rgba(243, 247, 255, 0.25)",
     subtitleUseTitleColor: false,
 
     labelLeft: "FASHION MEETS SPEED",
@@ -166,9 +166,8 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   front: {
     title: "AT01",
     subtitle: "Blue Strike",
-    titleColor: "#07101F",
+    titleColor: "#F3F7FF",
 
-    // Đây là dòng bạn cần: subtitle sẽ tự cùng màu với title SF1000.
     subtitleUseTitleColor: true,
 
     labelLeft: "CHASSIS",
@@ -197,7 +196,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   cockpit: {
     title: '"PRECISION TURNS SPEED INTO STYLE."',
     subtitle: "PIERRE GASLY",
-    titleColor: "#07101F",
+    titleColor: "#F3F7FF",
     subtitleUseTitleColor: true,
 
     labelLeft: "",
@@ -235,8 +234,7 @@ const BASE_SUBTITLE_CLASS =
 const BASE_BUTTON_CLASS =
   "flex h-12 w-12 cursor-pointer items-center justify-center border font-mono text-sm font-bold backdrop-blur-sm transition-all duration-500 hover:scale-110";
 
-// Cache theo modelPath để nhân bản nhiều xe không bị load engine lặp lại.
-const engineCache = new Map<string, SceneManager>();
+// 🚨 REMOVED: Global engineCache has been deleted to prevent memory leaks
 
 function mergeModelConfig(model?: Partial<TeamModelConfig>): TeamModelConfig {
   return { ...TEAM_MODEL, ...model };
@@ -492,49 +490,58 @@ export default function FerrariCanvas({
     () => {
       let isCancelled = false;
 
+      // 🚨 THE FIX: Use a locally scoped variable to track this exact engine instance
+      let localEngine: SceneManager | null = null;
+
       const setup = async () => {
         if (!containerRef.current) return;
 
-        let engine = engineCache.get(modelConfig.modelPath) ?? null;
+        // Assign to both the local variable and the ref
+        localEngine = new SceneManager(containerRef.current, modelConfig);
+        engineRef.current = localEngine;
 
-        if (!engine) {
-          engine = new SceneManager(containerRef.current, modelConfig);
-          engineCache.set(modelConfig.modelPath, engine);
-          engineRef.current = engine;
+        try {
+          await localEngine.init();
 
-          await engine.init();
-          engine.precompileShaders();
-          engine.warmUpGPU();
-        } else {
-          engineRef.current = engine;
-          containerRef.current.appendChild(engine.renderer.domElement);
-        }
+          // CIRCUIT BREAKER
+          if (isCancelled) return;
 
-        requestAnimationFrame(() => {
+          localEngine.precompileShaders();
+          localEngine.warmUpGPU();
+
           requestAnimationFrame(() => {
-            if (!isCancelled && engineRef.current) {
-              startMainShow(
-                engineRef.current,
-                topBarRef.current,
-                bottomBarRef.current,
-                () => setIsEngineReady(true),
-              );
-            }
+            requestAnimationFrame(() => {
+              if (!isCancelled && localEngine) {
+                startMainShow(
+                  localEngine,
+                  topBarRef.current,
+                  bottomBarRef.current,
+                  () => setIsEngineReady(true)
+                );
+              }
+            });
           });
-        });
+        } catch (e) {
+          console.warn("Engine setup aborted", e);
+        }
       };
 
       setup();
 
       return () => {
         isCancelled = true;
-        const engine = engineRef.current;
 
-        if (engine && containerRef.current) {
-          const canvas = engine.renderer.domElement;
+        // 🚨 THE FIX: Clean up the LOCAL engine, not the ref.
+        // This guarantees 100% memory disposal even if React double-renders quickly.
+        if (localEngine) {
+          if (containerRef.current && localEngine.renderer.domElement) {
+            if (containerRef.current.contains(localEngine.renderer.domElement)) {
+              containerRef.current.removeChild(localEngine.renderer.domElement);
+            }
+          }
 
-          if (containerRef.current.contains(canvas)) {
-            containerRef.current.removeChild(canvas);
+          if (typeof localEngine.destroy === "function") {
+            localEngine.destroy();
           }
         }
       };
@@ -547,7 +554,7 @@ export default function FerrariCanvas({
         modelConfig.ambientLightColor,
         modelConfig.ambientIntensity,
       ],
-    },
+    }
   );
 
   // === HOOK 2: text enter animations ===
@@ -559,7 +566,9 @@ export default function FerrariCanvas({
       const uiContainer = triggerRef.current;
       const extras = getAnimatedExtras(uiContainer);
       const lineEl = getAnimatedLine(uiContainer);
-      const allElements = [titleEl, ...extras, lineEl].filter(Boolean) as Element[];
+      const allElements = [titleEl, ...extras, lineEl].filter(
+        Boolean
+      ) as Element[];
 
       resetAnimatedElements(allElements);
       animateLine(lineEl);
@@ -568,14 +577,14 @@ export default function FerrariCanvas({
       const splitInstances = animateTitleByEffect(
         titleEl,
         extras,
-        currentView.textEffect,
+        currentView.textEffect
       );
 
       return () => {
         splitInstances.forEach((split) => split.revert());
       };
     },
-    { dependencies: [activeView, isEngineReady] },
+    { dependencies: [activeView, isEngineReady] }
   );
 
   const handleViewChange = (view: ViewKey) => {
@@ -593,7 +602,7 @@ export default function FerrariCanvas({
       view,
       topBarRef.current,
       bottomBarRef.current,
-      barsContainerRef.current,
+      barsContainerRef.current
     );
 
     gsap.to(containerRef.current, {

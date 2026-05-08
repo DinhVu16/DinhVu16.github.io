@@ -1,6 +1,6 @@
 "use client";
 
-import { SceneManager } from "../renders/ferrari";
+import { SceneManager } from "../renders/render";
 import { startMainShow, triggerCameraView } from "../hook/hero-anim";
 import { useMemo, useRef, useState } from "react";
 import type { CSSProperties, RefObject } from "react";
@@ -112,21 +112,23 @@ const TEAM_MODEL: TeamModelConfig = {
 // 2) THEME: toàn bộ màu chính của section nằm ở đây.
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
-    sectionBackground:
-      "linear-gradient(180deg, #00B8AD 0%, #008F87 42%, #056C67 72%, #034B47 100%)",
-    cinematicBar: "#071C1C",
-    backgroundTitleColor: "rgba(243, 255, 253, 0.16)",
-    viewTitleColor: "#F3FFFD",
-    mainText: "#F3FFFD",
-    line: "#F3FFFD",
+  sectionBackground:
+      "linear-gradient(180deg, #071C1C 0%, #003B37 52%, #000F0E 100%)",
+  cinematicBar: "#00D2BE",
 
-    buttonActiveBg: "#071C1C",
-    buttonActiveText: "#F3FFFD",
-    buttonActiveBorder: "#071C1C",
+  backgroundTitleColor: "rgba(0, 210, 190, 0.32)",
+  viewTitleColor: "#F3FFFD",
 
-    buttonIdleBg: "rgba(7, 28, 28, 0.16)",
-    buttonIdleText: "#F3FFFD",
-    buttonIdleBorder: "rgba(243, 255, 253, 0.35)",
+  mainText: "#F3FFFD",
+  line: "#00D2BE",
+
+  buttonActiveBg: "#00D2BE",
+  buttonActiveText: "#061B1B",
+  buttonActiveBorder: "#00D2BE",
+
+  buttonIdleBg: "rgba(243, 255, 253, 0.08)",
+  buttonIdleText: "#F3FFFD",
+  buttonIdleBorder: "rgba(0, 210, 190, 0.45)",
 };
 
 // =========================================================
@@ -136,7 +138,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   side: {
     title: "MERCEDES",
     subtitle: "Mercedes-AMG Petronas Formula One Team",
-    titleColor: "rgba(243, 255, 253, 0.16)",
+    titleColor: "rgba(0, 210, 190, 0.32)",
     subtitleUseTitleColor: false,
 
     labelLeft: "HYBRID ERA DOMINANCE",
@@ -166,7 +168,6 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
     subtitle: "Black Arrow",
     titleColor: "#F3FFFD",
 
-    // Đây là dòng bạn cần: subtitle sẽ tự cùng màu với title SF1000.
     subtitleUseTitleColor: true,
 
     labelLeft: "CHASSIS",
@@ -233,8 +234,7 @@ const BASE_SUBTITLE_CLASS =
 const BASE_BUTTON_CLASS =
   "flex h-12 w-12 cursor-pointer items-center justify-center border font-mono text-sm font-bold backdrop-blur-sm transition-all duration-500 hover:scale-110";
 
-// Cache theo modelPath để nhân bản nhiều xe không bị load engine lặp lại.
-const engineCache = new Map<string, SceneManager>();
+// 🚨 REMOVED: Global engineCache has been deleted to prevent VRAM memory leaks.
 
 function mergeModelConfig(model?: Partial<TeamModelConfig>): TeamModelConfig {
   return { ...TEAM_MODEL, ...model };
@@ -464,7 +464,7 @@ function animateTitleByEffect(
   return splitInstances;
 }
 
-export default function FerrariCanvas({
+export default function MercedesCanvas({
   theme,
   model,
   initialView = "side",
@@ -490,49 +490,58 @@ export default function FerrariCanvas({
     () => {
       let isCancelled = false;
 
+      // 🚨 THE FIX: Use a locally scoped variable to track this exact engine instance
+      let localEngine: SceneManager | null = null;
+
       const setup = async () => {
         if (!containerRef.current) return;
 
-        let engine = engineCache.get(modelConfig.modelPath) ?? null;
+        // Assign to both the local variable and the ref
+        localEngine = new SceneManager(containerRef.current, modelConfig);
+        engineRef.current = localEngine;
 
-        if (!engine) {
-          engine = new SceneManager(containerRef.current, modelConfig);
-          engineCache.set(modelConfig.modelPath, engine);
-          engineRef.current = engine;
+        try {
+          await localEngine.init();
 
-          await engine.init();
-          engine.precompileShaders();
-          engine.warmUpGPU();
-        } else {
-          engineRef.current = engine;
-          containerRef.current.appendChild(engine.renderer.domElement);
-        }
+          // 🚨 CIRCUIT BREAKER: Stop executing if user navigated away
+          if (isCancelled) return;
 
-        requestAnimationFrame(() => {
+          localEngine.precompileShaders();
+          localEngine.warmUpGPU();
+
           requestAnimationFrame(() => {
-            if (!isCancelled && engineRef.current) {
-              startMainShow(
-                engineRef.current,
-                topBarRef.current,
-                bottomBarRef.current,
-                () => setIsEngineReady(true),
-              );
-            }
+            requestAnimationFrame(() => {
+              if (!isCancelled && localEngine) {
+                startMainShow(
+                  localEngine,
+                  topBarRef.current,
+                  bottomBarRef.current,
+                  () => setIsEngineReady(true)
+                );
+              }
+            });
           });
-        });
+        } catch (e) {
+          console.warn("Engine setup aborted", e);
+        }
       };
 
       setup();
 
       return () => {
         isCancelled = true;
-        const engine = engineRef.current;
 
-        if (engine && containerRef.current) {
-          const canvas = engine.renderer.domElement;
+        // 🚨 THE FIX: Clean up the LOCAL engine, not the ref.
+        // This guarantees 100% memory disposal even if React double-renders quickly.
+        if (localEngine) {
+          if (containerRef.current && localEngine.renderer.domElement) {
+            if (containerRef.current.contains(localEngine.renderer.domElement)) {
+              containerRef.current.removeChild(localEngine.renderer.domElement);
+            }
+          }
 
-          if (containerRef.current.contains(canvas)) {
-            containerRef.current.removeChild(canvas);
+          if (typeof localEngine.destroy === "function") {
+            localEngine.destroy();
           }
         }
       };
@@ -545,7 +554,7 @@ export default function FerrariCanvas({
         modelConfig.ambientLightColor,
         modelConfig.ambientIntensity,
       ],
-    },
+    }
   );
 
   // === HOOK 2: text enter animations ===

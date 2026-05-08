@@ -16,26 +16,45 @@ export default function DotBootSequence() {
   const progressLineRef = useRef<HTMLDivElement>(null);
   const progressTextRef = useRef<HTMLSpanElement>(null);
   const f1LogoBoxRef = useRef<HTMLDivElement>(null);
-  const progressTextContainerRef = useRef<HTMLDivElement>(null); 
-  const progressTrackRef = useRef<HTMLDivElement>(null); 
+  const progressTextContainerRef = useRef<HTMLDivElement>(null);
+  const progressTrackRef = useRef<HTMLDivElement>(null);
 
   const [shouldRender, setShouldRender] = useState(false);
 
-  // === THE FIX IS HERE ===
+  // === THE WINDOW FLAG FIX ===
   useEffect(() => {
-    const isFirst = isInitialAppLoad;
-    isInitialAppLoad = false;
-    
-    // Only set shouldRender to true if it's the first load AND we are exactly on the home page
-    if (isFirst && pathname === "/") {
-      setShouldRender(true);
+    // Safety check to ensure we are running on the client (browser)
+    if (typeof window === "undefined") return;
+
+    // 1. If we are on ANY page other than the home page,
+    // silently lock the sequence so it doesn't jump-scare the user later.
+    if (pathname !== "/") {
+      (window as any).__F1_BOOT_PLAYED__ = true;
+      setShouldRender(false);
+      return;
     }
-  }, [pathname]); // Added pathname as a dependency
+
+    // 2. If we are on the Home page, check the window flag
+    if (!(window as any).__F1_BOOT_PLAYED__) {
+      // The flag is empty! This means it's a fresh load or hard refresh on "/". Play it!
+      setShouldRender(true);
+
+      // Immediately lock the flag so it doesn't play again if they navigate away and come back
+      (window as any).__F1_BOOT_PLAYED__ = true;
+    } else {
+      // The flag is true. The user navigated here from another page. Skip it!
+      setShouldRender(false);
+    }
+  }, [pathname]);
   // =======================
 
   useGSAP(
     () => {
       if (!shouldRender) return;
+
+      // Disable GSAP's lag smoothing so the animation "catches up"
+      // in the background instead of pausing when you switch tabs.
+      gsap.ticker.lagSmoothing(0);
 
       const tl = gsap.timeline({
         onComplete: () => setShouldRender(false),
@@ -277,7 +296,7 @@ export default function DotBootSequence() {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[99999] bg-[#050505] text-[#E0E0E0] pointer-events-auto overflow-hidden"
+      className="fixed inset-0 z-99999 bg-[#050505] text-[#E0E0E0] pointer-events-auto overflow-hidden"
     >
       {/* THE RIG LAYER */}
       <div className="absolute inset-0 pointer-events-none z-20">
@@ -293,7 +312,7 @@ export default function DotBootSequence() {
         {/* CENTER ANCHOR: THE FINAL F1 LOGO */}
         <div
           ref={f1LogoBoxRef}
-          className="absolute top-[50%] left-[50%] w-32 md:w-48 z-[999] will-change-transform"
+          className="absolute top-[50%] left-[50%] w-32 md:w-48 z-999 will-change-transform"
         >
           <img
             src="/trans-items/F1-trans.svg"
@@ -308,11 +327,17 @@ export default function DotBootSequence() {
         ref={progressBarRef}
         className="absolute bottom-18 left-0 w-full px-36 flex flex-col gap-4 z-30 invisible"
       >
-        <div ref={progressTextContainerRef} className="w-full flex justify-between font-mono tracking-widest text-white">
+        <div
+          ref={progressTextContainerRef}
+          className="w-full flex justify-between font-mono tracking-widest text-white"
+        >
           <span>SYS.LOADING</span>
           <span ref={progressTextRef}>0%</span>
         </div>
-        <div ref={progressTrackRef} className="w-full h-[1px] bg-white/20 relative">
+        <div
+          ref={progressTrackRef}
+          className="w-full h-px bg-white/20 relative"
+        >
           <div
             ref={progressLineRef}
             className="absolute top-0 left-0 w-full h-full bg-[#ffffff] will-change-transform"

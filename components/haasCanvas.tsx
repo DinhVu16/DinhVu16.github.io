@@ -1,6 +1,6 @@
 "use client";
 
-import { SceneManager } from "../renders/ferrari";
+import { SceneManager } from "../renders/render";
 import { startMainShow, triggerCameraView } from "../hook/hero-anim";
 import { useMemo, useRef, useState } from "react";
 import type { CSSProperties, RefObject } from "react";
@@ -113,10 +113,12 @@ const TEAM_MODEL: TeamModelConfig = {
 // =========================================================
 const TEAM_THEME: CanvasTheme = {
     sectionBackground:
-      "linear-gradient(180deg, #FFFFFF 0%, #F4F4F4 50%, #D6D6D6 100%)",
-    cinematicBar: "#F4F4F4",
-    backgroundTitleColor: "rgba(200, 16, 46, 0.20)",
+      "linear-gradient(180deg, #F4F4F4 0%, #FFFFFF 48%, #CFCFCF 100%)",
+    cinematicBar: "#C8102E",
+
+    backgroundTitleColor: "rgba(200, 16, 46, 0.22)",
     viewTitleColor: "#C8102E",
+
     mainText: "#C8102E",
     line: "#C8102E",
 
@@ -126,7 +128,7 @@ const TEAM_THEME: CanvasTheme = {
 
     buttonIdleBg: "rgba(255, 255, 255, 0.72)",
     buttonIdleText: "#111111",
-    buttonIdleBorder: "rgba(200, 16, 46, 0.35)",
+    buttonIdleBorder: "rgba(200, 16, 46, 0.45)",
 };
 
 // =========================================================
@@ -136,7 +138,7 @@ const VIEW_DATA: Record<ViewKey, ViewConfig> = {
   side: {
     title: "HAAS",
     subtitle: "Haas F1 Team",
-    titleColor: "rgba(200, 16, 46, 0.20)",
+    titleColor: "rgba(200, 16, 46, 0.22)",
     subtitleUseTitleColor: false,
 
     labelLeft: "AMERICAN OUTSIDER",
@@ -232,9 +234,6 @@ const BASE_SUBTITLE_CLASS =
 
 const BASE_BUTTON_CLASS =
   "flex h-12 w-12 cursor-pointer items-center justify-center border font-mono text-sm font-bold backdrop-blur-sm transition-all duration-500 hover:scale-110";
-
-// Cache theo modelPath để nhân bản nhiều xe không bị load engine lặp lại.
-const engineCache = new Map<string, SceneManager>();
 
 function mergeModelConfig(model?: Partial<TeamModelConfig>): TeamModelConfig {
   return { ...TEAM_MODEL, ...model };
@@ -464,7 +463,7 @@ function animateTitleByEffect(
   return splitInstances;
 }
 
-export default function FerrariCanvas({
+export default function HaasCanvas({
   theme,
   model,
   initialView = "side",
@@ -490,49 +489,58 @@ export default function FerrariCanvas({
     () => {
       let isCancelled = false;
 
+      // 🚨 THE FIX: Use a locally scoped variable to track this exact engine instance
+      let localEngine: SceneManager | null = null;
+
       const setup = async () => {
         if (!containerRef.current) return;
 
-        let engine = engineCache.get(modelConfig.modelPath) ?? null;
+        // Assign to both the local variable and the ref
+        localEngine = new SceneManager(containerRef.current, modelConfig);
+        engineRef.current = localEngine;
 
-        if (!engine) {
-          engine = new SceneManager(containerRef.current, modelConfig);
-          engineCache.set(modelConfig.modelPath, engine);
-          engineRef.current = engine;
+        try {
+          await localEngine.init();
 
-          await engine.init();
-          engine.precompileShaders();
-          engine.warmUpGPU();
-        } else {
-          engineRef.current = engine;
-          containerRef.current.appendChild(engine.renderer.domElement);
-        }
+          // 🚨 CIRCUIT BREAKER: Stop executing if user navigated away
+          if (isCancelled) return;
 
-        requestAnimationFrame(() => {
+          localEngine.precompileShaders();
+          localEngine.warmUpGPU();
+
           requestAnimationFrame(() => {
-            if (!isCancelled && engineRef.current) {
-              startMainShow(
-                engineRef.current,
-                topBarRef.current,
-                bottomBarRef.current,
-                () => setIsEngineReady(true),
-              );
-            }
+            requestAnimationFrame(() => {
+              if (!isCancelled && localEngine) {
+                startMainShow(
+                  localEngine,
+                  topBarRef.current,
+                  bottomBarRef.current,
+                  () => setIsEngineReady(true)
+                );
+              }
+            });
           });
-        });
+        } catch (e) {
+          console.warn("Engine setup aborted", e);
+        }
       };
 
       setup();
 
       return () => {
         isCancelled = true;
-        const engine = engineRef.current;
 
-        if (engine && containerRef.current) {
-          const canvas = engine.renderer.domElement;
+        // 🚨 THE FIX: Clean up the LOCAL engine, not the ref.
+        // This guarantees 100% memory disposal even if React double-renders quickly.
+        if (localEngine) {
+          if (containerRef.current && localEngine.renderer.domElement) {
+            if (containerRef.current.contains(localEngine.renderer.domElement)) {
+              containerRef.current.removeChild(localEngine.renderer.domElement);
+            }
+          }
 
-          if (containerRef.current.contains(canvas)) {
-            containerRef.current.removeChild(canvas);
+          if (typeof localEngine.destroy === "function") {
+            localEngine.destroy();
           }
         }
       };
@@ -545,7 +553,7 @@ export default function FerrariCanvas({
         modelConfig.ambientLightColor,
         modelConfig.ambientIntensity,
       ],
-    },
+    }
   );
 
   // === HOOK 2: text enter animations ===
