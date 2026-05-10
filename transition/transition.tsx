@@ -5,8 +5,6 @@ import { gsap } from "gsap";
 import { DrawSVGPlugin } from "gsap/dist/DrawSVGPlugin";
 import { useGSAP } from "@gsap/react";
 import { TransitionRouter } from "next-transition-router";
-import TelemetryText from "./TelemetryText";
-import SimulatedSmokeShader from "./backgroundShader";
 
 import { ReactSVG } from "react-svg";
 
@@ -42,21 +40,21 @@ export default function TransitionFunc({
 
         // 0. THE HARD RESET
         tl.set(masterScaleRef.current, { scale: 1 })
-          .set(holePlugRef.current, { opacity: 1, xPercent: 50 })
+          .set(holePlugRef.current, { opacity: 1, yPercent: 50 })
           .set(".f1-path", {
-            stroke: "#FFFFFF",
+            stroke: "#ee2e25",
             strokeWidth: 4,
             fill: "transparent",
             drawSVG: "0%",
-            xPercent: 50,
+            yPercent: 50,
           })
-          .set(bgRef.current, { opacity: 1, xPercent: 20 })
+          .set(bgRef.current, { opacity: 1, yPercent: 20 })
 
           // 1. ACTIVATE TRANSITION SCREEN: The Wiping Mask
           // We use a polygon clip-path. It starts squeezed to 0% width on the left edge.
           .set(container.current, {
             autoAlpha: 1,
-            clipPath: "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)",
+            clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
           })
           // We expand the right edge of the polygon to 100%, revealing the static scene inside.
           .to(container.current, {
@@ -66,14 +64,14 @@ export default function TransitionFunc({
           })
           .to(
             bgRef.current,
-            { xPercent: 0, duration: 1, ease: "power2.out" },
+            { yPercent: 0, duration: 1, ease: "power2.out" },
             "<",
           )
           .to(
             holePlugRef.current,
             {
-              xPercent: 0,
-              duration: 1.5,
+              yPercent: 0,
+              duration: 1.3,
               ease: "power2.Out",
             },
             "<",
@@ -81,7 +79,7 @@ export default function TransitionFunc({
           .to(
             ".f1-path",
             {
-              xPercent: 0,
+              yPercent: 0,
               duration: 1.5,
               ease: "power2.Out",
             },
@@ -102,7 +100,7 @@ export default function TransitionFunc({
           )
           .to(
             ".f1-path",
-            { fill: "#FFFFFF", duration: 0.5, ease: "power2.out" },
+            { fill: "#ee2e25", duration: 0.5, ease: "power2.out" },
             "+=0.1",
           );
 
@@ -113,7 +111,7 @@ export default function TransitionFunc({
           .timeline()
 
           // 3. THE BREATHER
-          .to({}, { duration: 0.2 })
+          .to({}, { duration: 1 })
 
           // 4. OPEN THE PORTAL
           .to(".f1-path", {
@@ -175,7 +173,7 @@ export default function TransitionFunc({
         >
           {/* THE INVERSE MASK */}
           <div
-            className="absolute inset-0 bg-[#ee2e25]"
+            className="absolute inset-0 bg-[#ffffff]"
             style={{
               WebkitMaskImage: `url('/trans-items/F1-trans.svg'), linear-gradient(black, black)`,
               WebkitMaskPosition: "center, center",
@@ -191,7 +189,7 @@ export default function TransitionFunc({
           />
 
           {/* THE HOLE PLUG */}
-          <div ref={holePlugRef} className="absolute w-75 h-75 bg-[#ee2e25]" />
+          <div ref={holePlugRef} className="absolute w-75 h-75 bg-[#ffffff]" />
 
           {/* THE SVG INJECTOR */}
           <div className="absolute inset-0 flex items-center justify-center">
@@ -214,12 +212,6 @@ export default function TransitionFunc({
               className="w-48 h-auto"
             />
           </div>
-        </div>
-        <div
-          ref={bgRef}
-          className="absolute inset-0 w-full h-full pointer-events-none mix-blend-screen opacity-90"
-        >
-          <TelemetryText />
         </div>
       </div>
     </TransitionRouter>

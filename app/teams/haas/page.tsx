@@ -159,7 +159,6 @@ type TeamPageData = {
     title: string;
     subTitle: string;
     videoUrl: string;
-    videoLabel: string;
     items: HighlightItem[];
   };
 };
@@ -220,44 +219,44 @@ const teamPageData: TeamPageData = {
     {
       label: "Haas / 2020",
       src: "/images/haas/haas-1.webp",
-      alt: "Haas archive 1",
+      alt: "Haas 1",
       cardClassName: "mt-[-18vh] w-[26vw]",
-      imageBoxClassName: "aspect-[16/10]",
+      imageBoxClassName: "aspect-[16/9]",
     },
     {
       label: "VF-20 Detail",
       src: "/images/haas/haas-2.webp",
-      alt: "Haas archive 2",
+      alt: "Haas 2",
       cardClassName: "mt-[12vh] w-[42vw]",
-      imageBoxClassName: "aspect-[16/9]",
+      imageBoxClassName: "aspect-[4/3]",
     },
     {
       label: "Chassis",
       src: "/images/haas/haas-3.webp",
-      alt: "Haas archive 3",
+      alt: "Haas 3",
       cardClassName: "mt-[-22vh] w-[22vw]",
       imageBoxClassName: "aspect-[16/9]",
     },
     {
       label: "Race Frame",
       src: "/images/haas/haas-4.webp",
-      alt: "Haas archive 4",
+      alt: "Haas 4",
       cardClassName: "mt-[20vh] w-[30vw]",
-      imageBoxClassName: "aspect-[4/3]",
+      imageBoxClassName: "h-[44vh]",
     },
     {
       label: "Haas Detail",
       src: "/images/haas/haas-5.webp",
-      alt: "Haas archive 5",
-      cardClassName: "mt-[-5vh] w-[23vw]",
-      imageBoxClassName: "aspect-[2/2]"
+      alt: "Haas 5",
+      cardClassName: "mt-[5vh] w-[46vw]",
+      imageBoxClassName: "h-[85vh]",
     },
     {
       label: "Engine Era",
       src: "/images/haas/haas-6.webp",
-      alt: "Haas archive 6",
+      alt: "Haas 6",
       cardClassName: "mt-[16vh] w-[24vw]",
-      imageBoxClassName: "aspect-square",
+      imageBoxClassName: "h-[36vh]",
     },
   ],
 
@@ -296,7 +295,6 @@ const teamPageData: TeamPageData = {
     title: "Highlight",
     subTitle: "Team Highlights (2020):",
     videoUrl: "https://www.youtube.com/playlist?list=PLfoNZDHitwjXRANMnqmL0BzNGianZ2eX_",
-    videoLabel: "WATCH 2020 HIGHLIGHTS",
     items: [
       ["Constructors", "9th", ""],
       ["Total Points", "3", ""],
@@ -739,7 +737,7 @@ function CarHeaderSection({ data }: { data: TeamPageData }) {
             }}
           >
             <h2
-              className="text-[4rem] font-black uppercase leading-[1.05] tracking-wider"
+              className="text-[4rem] font-akira uppercase leading-[1.05] tracking-wider"
               style={{ color: data.theme.surface }}
             >
               {data.season}
@@ -974,7 +972,6 @@ function HighlightSection({ data }: { data: TeamPageData }) {
           target="_blank"
           className="absolute bottom-10 right-10 z-10 text-sm uppercase tracking-widest text-gray-400 underline transition-colors hover:text-white"
         >
-          {highlight.videoLabel}
         </Link>
       </div>
     </section>

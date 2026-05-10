@@ -159,7 +159,6 @@ type TeamPageData = {
     title: string;
     subTitle: string;
     videoUrl: string;
-    videoLabel: string;
     items: HighlightItem[];
   };
 };
@@ -222,21 +221,21 @@ const teamPageData: TeamPageData = {
       src: "/images/racingpoint/racingpoint-1.webp",
       alt: "Racing Point archive 1",
       cardClassName: "mt-[-18vh] w-[26vw]",
-      imageBoxClassName: "h-[58vh]",
+      imageBoxClassName: "aspect-[16/9]",
     },
     {
       label: "RP20 Detail",
       src: "/images/racingpoint/racingpoint-2.webp",
       alt: "Racing Point archive 2",
       cardClassName: "mt-[12vh] w-[42vw]",
-      imageBoxClassName: "h-[64vh]",
+      imageBoxClassName: "aspect-[4/3]",
     },
     {
       label: "Chassis",
       src: "/images/racingpoint/racingpoint-3.webp",
       alt: "Racing Point archive 3",
       cardClassName: "mt-[-22vh] w-[22vw]",
-      imageBoxClassName: "h-[34vh]",
+      imageBoxClassName: "aspect-[16/9]",
     },
     {
       label: "Race Frame",
@@ -296,7 +295,6 @@ Key Drivers: Sergio Perez, Lance Stroll (and Nico Hülkenberg as a super-sub).`,
     title: "Highlight",
     subTitle: "Team Highlights (2020):",
     videoUrl: "https://www.youtube.com/playlist?list=PLfoNZDHitwjXRANMnqmL0BzNGianZ2eX_",
-    videoLabel: "WATCH 2020 HIGHLIGHTS",
     items: [
       ["Constructors", "4th", ""],
       ["Total Points", "195", ""],
@@ -740,7 +738,7 @@ function CarHeaderSection({ data }: { data: TeamPageData }) {
             }}
           >
             <h2
-              className="text-[4rem] font-black uppercase leading-[1.05] tracking-wider"
+              className="text-[4rem] font-akira uppercase leading-[1.05] tracking-wider"
               style={{ color: data.theme.surface }}
             >
               {data.season}
@@ -974,7 +972,7 @@ function HighlightSection({ data }: { data: TeamPageData }) {
           target="_blank"
           className="absolute bottom-10 right-10 z-10 text-sm uppercase tracking-widest text-gray-400 underline transition-colors hover:text-white"
         >
-          {highlight.videoLabel}
+
         </Link>
       </div>
     </section>

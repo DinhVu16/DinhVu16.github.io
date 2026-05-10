@@ -136,7 +136,6 @@ type TeamPageData = {
     title: string;
     subTitle: string;
     videoUrl: string;
-    videoLabel: string;
     items: HighlightItem[];
   };
 };
@@ -261,7 +260,6 @@ const teamPageData: TeamPageData = {
   title: "Highlight",
   subTitle: "Team Highlights (2020):",
   videoUrl: "https://youtu.be/2femix89pTE?si=gjKmeIRc-Qh_JVA1",
-  videoLabel: "WATCH RÄIKKÖNEN'S RECORD MOMENT",
   items: [
     ["Constructors", "8th", ""],
     ["Total Points", "8", ""],
@@ -813,7 +811,6 @@ function PrimaryDriverSection({ data }: { data: TeamPageData }) {
             className="text-sm underline transition-colors hover:text-white"
             style={{ color: data.theme.accent }}
           >
-            {driver.videoLabel}
           </Link>
         </div>
 
@@ -939,7 +936,6 @@ function HighlightSection({ data }: { data: TeamPageData }) {
           target="_blank"
           className="absolute bottom-10 right-10 z-10 text-sm uppercase tracking-widest text-gray-400 underline transition-colors hover:text-white"
         >
-          {highlight.videoLabel}
         </Link>
       </div>
     </section>

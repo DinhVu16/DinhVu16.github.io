@@ -1,6 +1,6 @@
 import gsap from "gsap";
 import * as THREE from "three";
-import { SceneManager } from "../renders/ferrari";
+import { SceneManager } from "../renders/render";
 
 export const startMainShow = (
   engine: SceneManager,
@@ -68,8 +68,8 @@ export const triggerCameraView = (
     targetPosition = { x: -5, y: 0.7, z: 0 };
     targetRotation = { x: 0, y: -Math.PI / 2, z: 0 };
     LightPosition = { x: 0, y: 3, z: 0 };
-    topBarOffset = "40vh";
-    bottomBarOffset = "40vh";
+    topBarOffset = "38vh";
+    bottomBarOffset = "38vh";
     containerRotation = 0;
   } else if (view === "front") {
     targetPosition = { x: -1.7, y: 0.5, z: 3.5 };

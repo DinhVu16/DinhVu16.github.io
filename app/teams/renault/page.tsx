@@ -159,7 +159,6 @@ type TeamPageData = {
     title: string;
     subTitle: string;
     videoUrl: string;
-    videoLabel: string;
     items: HighlightItem[];
   };
 };
@@ -221,8 +220,8 @@ const teamPageData: TeamPageData = {
       label: "Renault / 2020",
       src: "/images/renault/renault-1.webp",
       alt: "Renault archive 1",
-      cardClassName: "mt-[-18vh] w-[26vw]",
-      imageBoxClassName: "h-[58vh]",
+      cardClassName: "mt-[-15vh] w-[26vw]",
+      imageBoxClassName: "h-[60vh]",
     },
     {
       label: "R.S.20 Detail",
@@ -250,7 +249,7 @@ const teamPageData: TeamPageData = {
       src: "/images/renault/renault-5.webp",
       alt: "Renault archive 5",
       cardClassName: "mt-[-10vh] w-[46vw]",
-      imageBoxClassName: "h-[58vh]",
+      imageBoxClassName: "h-[60vh]",
     },
     {
       label: "Engine Era",
@@ -296,7 +295,6 @@ const teamPageData: TeamPageData = {
     title: "Highlight",
     subTitle: "Team Highlights (2020):",
     videoUrl: "https://www.youtube.com/playlist?list=PLfoNZDHitwjXRANMnqmL0BzNGianZ2eX_",
-    videoLabel: "WATCH 2020 HIGHLIGHTS",
     items: [
       ["Constructors", "5th", ""],
       ["Total Points", "181", ""],
@@ -742,7 +740,7 @@ function CarHeaderSection({ data }: { data: TeamPageData }) {
             }}
           >
             <h2
-              className="text-[4rem] font-black uppercase leading-[1.05] tracking-wider"
+              className="text-[4rem] font-akira uppercase leading-[1.05] tracking-wider"
               style={{ color: data.theme.surface }}
             >
               {data.season}
@@ -977,7 +975,6 @@ function HighlightSection({ data }: { data: TeamPageData }) {
           target="_blank"
           className="absolute bottom-10 right-10 z-10 text-sm uppercase tracking-widest text-gray-400 underline transition-colors hover:text-white"
         >
-          {highlight.videoLabel}
         </Link>
       </div>
     </section>

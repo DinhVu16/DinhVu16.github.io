@@ -138,9 +138,9 @@ export default function Topbar() {
       id="f1-topbar-root"
       style={
         {
-          "--topbar-bg": "#ffffff",
-          "--topbar-accent": "#111111",
-          "--topbar-hover-text": "#ffffff",
+          "--topbar-bg": "#111111",
+          "--topbar-accent": "#ffffff",
+          "--topbar-hover-text": "#111111",
           "--topbar-button-shadow": "rgba(0, 0, 0, 0.25)",
           "--topbar-overlay": "#111111",
         } as CSSProperties

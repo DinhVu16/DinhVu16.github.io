@@ -159,7 +159,6 @@ type TeamPageData = {
     title: string;
     subTitle: string;
     videoUrl: string;
-    videoLabel: string;
     items: HighlightItem[];
   };
 };
@@ -222,14 +221,14 @@ const teamPageData: TeamPageData = {
       src: "/images/mercedes/mercedes-1.webp",
       alt: "Mercedes archive 1",
       cardClassName: "mt-[-18vh] w-[26vw]",
-      imageBoxClassName: "aspect-[16/10]",
+      imageBoxClassName: "aspect-[16/9]",
     },
     {
       label: "W11 Detail",
       src: "/images/mercedes/mercedes-2.webp",
-      alt: "mercedes archive 2",
+      alt: "Mercedes archive 2",
       cardClassName: "mt-[12vh] w-[42vw]",
-      imageBoxClassName: "aspect-[16/9]",
+      imageBoxClassName: "aspect-[4/3]",
     },
     {
       label: "Chassis",
@@ -243,21 +242,21 @@ const teamPageData: TeamPageData = {
       src: "/images/mercedes/mercedes-4.webp",
       alt: "Mercedes archive 4",
       cardClassName: "mt-[20vh] w-[30vw]",
-      imageBoxClassName: "aspect-[4/3]",
+      imageBoxClassName: "aspect-[16/9]",
     },
     {
       label: "Mercedes Detail",
       src: "/images/mercedes/mercedes-5.webp",
       alt: "Mercedes archive 5",
-      cardClassName: "mt-[-5vh] w-[23vw]",
-      imageBoxClassName: "aspect-[4/3]"
+      cardClassName: "mt-[10vh] w-[46vw]",
+      imageBoxClassName: "h-[80vh]",
     },
     {
       label: "Engine Era",
       src: "/images/mercedes/mercedes-6.webp",
       alt: "Mercedes archive 6",
       cardClassName: "mt-[16vh] w-[24vw]",
-      imageBoxClassName: "aspect-square",
+      imageBoxClassName: "h-[36vh]",
     },
   ],
 
@@ -296,7 +295,6 @@ const teamPageData: TeamPageData = {
     title: "Highlight",
     subTitle: "Team Highlights (2020):",
     videoUrl: "https://www.youtube.com/playlist?list=PLfoNZDHitwjXRANMnqmL0BzNGianZ2eX_",
-    videoLabel: "WATCH 2020 HIGHLIGHTS",
     items: [
       ["Constructors", "1st", ""],
       ["Total Points", "573", ""],
@@ -741,7 +739,7 @@ function CarHeaderSection({ data }: { data: TeamPageData }) {
             }}
           >
             <h2
-              className="text-[4rem] font-black uppercase leading-[1.05] tracking-wider"
+              className="text-[4rem] font-akira uppercase leading-[1.05] tracking-wider"
               style={{ color: data.theme.surface }}
             >
               {data.season}
@@ -976,7 +974,6 @@ function HighlightSection({ data }: { data: TeamPageData }) {
           target="_blank"
           className="absolute bottom-10 right-10 z-10 text-sm uppercase tracking-widest text-gray-400 underline transition-colors hover:text-white"
         >
-          {highlight.videoLabel}
         </Link>
       </div>
     </section>

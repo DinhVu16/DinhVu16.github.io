@@ -159,7 +159,6 @@ type TeamPageData = {
     title: string;
     subTitle: string;
     videoUrl: string;
-    videoLabel: string;
     items: HighlightItem[];
   };
 };
@@ -220,44 +219,44 @@ const teamPageData: TeamPageData = {
     {
       label: "Ferrari / 2020",
       src: "/images/ferrari/ferrari-1.webp",
-      alt: "Ferrari archive 1",
+      alt: "Ferrari 1",
       cardClassName: "mt-[-18vh] w-[26vw]",
-      imageBoxClassName: "aspect-square",
+      imageBoxClassName: "aspect-[16/9]",
     },
     {
       label: "SF1000 Detail",
       src: "/images/ferrari/ferrari-2.webp",
-      alt: "Ferrari archive 2",
+      alt: "Ferrari 2",
       cardClassName: "mt-[12vh] w-[42vw]",
       imageBoxClassName: "aspect-[4/3]",
     },
     {
       label: "Chassis",
       src: "/images/ferrari/ferrari-3.webp",
-      alt: "Ferrari archive 3",
+      alt: "Ferrari 3",
       cardClassName: "mt-[-22vh] w-[22vw]",
       imageBoxClassName: "aspect-[16/9]",
     },
     {
       label: "Race Frame",
       src: "/images/ferrari/ferrari-4.webp",
-      alt: "Ferrari archive 4",
+      alt: "Ferrari 4",
       cardClassName: "mt-[20vh] w-[30vw]",
-      imageBoxClassName: "aspect-[2/2]",
+      imageBoxClassName: "h-[44vh]",
     },
     {
       label: "Ferrari Detail",
       src: "/images/ferrari/ferrari-5.webp",
-      alt: "Ferrari archive 5",
+      alt: "Ferrari 5",
       cardClassName: "mt-[-10vh] w-[46vw]",
       imageBoxClassName: "h-[58vh]",
     },
     {
       label: "Engine Era",
       src: "/images/ferrari/ferrari-6.webp",
-      alt: "Ferrari archive 6",
+      alt: "Ferrari 6",
       cardClassName: "mt-[16vh] w-[24vw]",
-      imageBoxClassName: "aspect-[16/9]",
+      imageBoxClassName: "h-[36vh]",
     },
   ],
 
@@ -296,7 +295,6 @@ const teamPageData: TeamPageData = {
     title: "Highlight",
     subTitle: "Team Highlights (2020):",
     videoUrl: "https://www.youtube.com/playlist?list=PLfoNZDHitwjXRANMnqmL0BzNGianZ2eX_",
-    videoLabel: "WATCH 2020 HIGHLIGHTS",
     items: [
       ["Constructors", "6th", ""],
       ["Total Points", "131", ""],
@@ -741,7 +739,7 @@ function CarHeaderSection({ data }: { data: TeamPageData }) {
             }}
           >
             <h2
-              className="text-[4rem] font-black uppercase leading-[1.05] tracking-wider"
+              className="text-[4rem] font-akira uppercase leading-[1.05] tracking-wider"
               style={{ color: data.theme.surface }}
             >
               {data.season}
@@ -859,7 +857,8 @@ function PrimaryDriverSection({ data }: { data: TeamPageData }) {
             <img
               src={data.images.primaryDriverPortrait}
               alt={driver.name}
-              className="h-full w-full object-cover object-top"
+              className="h-full w-full object-cover"
+              style={{ objectPosition: "center 35%" }}
             />
           </div>
         </div>
@@ -976,7 +975,6 @@ function HighlightSection({ data }: { data: TeamPageData }) {
           target="_blank"
           className="absolute bottom-10 right-10 z-10 text-sm uppercase tracking-widest text-gray-400 underline transition-colors hover:text-white"
         >
-          {highlight.videoLabel}
         </Link>
       </div>
     </section>

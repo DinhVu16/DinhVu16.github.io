@@ -159,7 +159,6 @@ type TeamPageData = {
     title: string;
     subTitle: string;
     videoUrl: string;
-    videoLabel: string;
     items: HighlightItem[];
   };
 };
@@ -222,42 +221,42 @@ const teamPageData: TeamPageData = {
       src: "/images/redbull/redbull-1.webp",
       alt: "Red Bull archive 1",
       cardClassName: "mt-[-18vh] w-[26vw]",
-      imageBoxClassName: "aspect-[16/10]",
+      imageBoxClassName: "aspect-[16/9]",
     },
     {
       label: "RB16 Detail",
       src: "/images/redbull/redbull-2.webp",
       alt: "Red Bull archive 2",
       cardClassName: "mt-[12vh] w-[42vw]",
-      imageBoxClassName: "aspect-[16/9]",
+      imageBoxClassName: "aspect-[16/11]",
     },
     {
       label: "Chassis",
       src: "/images/redbull/redbull-3.webp",
       alt: "Red Bull archive 3",
       cardClassName: "mt-[-22vh] w-[22vw]",
-      imageBoxClassName: "aspect-[16/9]",
+      imageBoxClassName: "aspect-[16/11]",
     },
     {
       label: "Race Frame",
       src: "/images/redbull/redbull-4.webp",
       alt: "Red Bull archive 4",
       cardClassName: "mt-[20vh] w-[30vw]",
-      imageBoxClassName: "aspect-[4/3]",
+      imageBoxClassName: "h-[44vh]",
     },
     {
       label: "Red Bull Detail",
       src: "/images/redbull/redbull-5.webp",
       alt: "Red Bull archive 5",
-      cardClassName: "mt-[-5vh] w-[23vw]",
-      imageBoxClassName: "ratio-[16/9]",
+      cardClassName: "mt-[-10vh] w-[46vw]",
+      imageBoxClassName: "aspect-[16/10]",
     },
     {
       label: "Engine Era",
       src: "/images/redbull/redbull-6.webp",
       alt: "Red Bull archive 6",
       cardClassName: "mt-[16vh] w-[24vw]",
-      imageBoxClassName: "aspect-square",
+      imageBoxClassName: "h-[36vh]",
     },
   ],
 
@@ -296,7 +295,6 @@ const teamPageData: TeamPageData = {
     title: "Highlight",
     subTitle: "Team Highlights (2020):",
     videoUrl: "https://www.youtube.com/playlist?list=PLfoNZDHitwjXRANMnqmL0BzNGianZ2eX_",
-    videoLabel: "WATCH 2020 HIGHLIGHTS",
     items: [
       ["Constructors", "2nd", ""],
       ["Total Points", "319", ""],
@@ -741,7 +739,7 @@ function CarHeaderSection({ data }: { data: TeamPageData }) {
             }}
           >
             <h2
-              className="text-[4rem] font-black uppercase leading-[1.05] tracking-wider"
+              className="text-[4rem] font-akira uppercase leading-[1.05] tracking-wider"
               style={{ color: data.theme.surface }}
             >
               {data.season}
@@ -976,7 +974,6 @@ function HighlightSection({ data }: { data: TeamPageData }) {
           target="_blank"
           className="absolute bottom-10 right-10 z-10 text-sm uppercase tracking-widest text-gray-400 underline transition-colors hover:text-white"
         >
-          {highlight.videoLabel}
         </Link>
       </div>
     </section>
